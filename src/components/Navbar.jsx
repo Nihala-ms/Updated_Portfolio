@@ -21,8 +21,8 @@ const Navbar = () => {
           href="#home"
           className="text-2xl font-bold tracking-wide"
         >
-          <span className="text-white">Ni</span>
-          <span className="text-cyan-400">hala</span>
+          <span className="text-white">NI</span>
+          <span className="text-cyan-400">HALA</span>
         </a>
 
         {/* Desktop Menu */}

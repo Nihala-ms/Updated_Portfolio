@@ -80,7 +80,7 @@ const Skills = () => {
         {/* Heading */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold">
-            My <span className="text-cyan-400">Skills</span>
+             <span className="text-cyan-400">Skills</span>
           </h2>
 
           <div className="w-24 h-1 bg-cyan-400 mx-auto rounded-full mt-4"></div>

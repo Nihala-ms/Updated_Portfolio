@@ -7,7 +7,7 @@ const Footer = () => {
 
         <div>
           <h2 className="text-2xl font-bold">
-            Ni<span className="text-cyan-400">hala</span>
+            NI<span className="text-cyan-400">HALA</span>
           </h2>
 
           <p className="text-gray-400 mt-2">

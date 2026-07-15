@@ -5,7 +5,7 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 
-import profileImage from "../assets/images/profile.png";
+import profileImage from "../assets/images/profile1.png";
 
 const Hero = () => {
   return (
@@ -137,7 +137,7 @@ const Hero = () => {
                 src={profileImage}
                 alt="Nihala"
                 className="relative z-10 w-72 h-72 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px]
-                 object-contain rounded-full border-4 border-cyan-400
+                 object-contain rounded-full border-4 border-cyan-400 bg-zinc-300
                  shadow-[0_0_60px_rgba(34,211,238,0.35)]"
               />
 
