@@ -16,7 +16,7 @@ const projects = [
     description:
       "A full-stack insurance application for submitting, reviewing, tracking, and managing insurance claims efficiently.",
     technologies: ["MongoDB", "Express.js", "React.js", "Node.js"],
-    github: "#",
+    github: "https://github.com/Nihala-ms",
   },
 
   {
@@ -27,7 +27,7 @@ const projects = [
     description:
       "A modern recipe platform where users can discover recipes, explore ingredients, and follow step-by-step cooking instructions.",
     technologies: ["Angular", "TypeScript", "MongoDB"],
-    github: "#",
+    github: "https://github.com/Nihala-ms",
   },
 
   {
@@ -38,7 +38,7 @@ const projects = [
     description:
       "A responsive e-commerce application featuring product browsing, detailed product views, shopping cart functionality, and a smooth user experience.",
     technologies: [ "Javascript", "React.js", "Fetch API"],
-    github: "#",
+    github: "https://github.com/Nihala-ms",
   },
 
   {
@@ -49,7 +49,7 @@ const projects = [
     description:
       "A responsive bakery website showcasing cakes, pastries, and desserts through a clean and engaging product gallery.",
     technologies: ["JavaScript", "React.js", "Fetch API"],
-    github: "#",
+    github: "https://github.com/Nihala-ms",
   },
 
   {
@@ -60,7 +60,7 @@ const projects = [
     description:
       "A full-stack job portal designed to connect employers and job seekers through job posting, search, filtering, and application management.",
     technologies: ["Python", "Django", "MySQL", "HTML"],
-    github: "#",
+    github: "https://github.com/Nihala-ms",
   },
 
   {
@@ -71,7 +71,7 @@ const projects = [
     description:
       "A healthcare platform focused on providing a simple and user-friendly digital experience for managing patient services.",
     technologies: ["Python", "Django", "MySQL", "HTML"],
-    github: "#",
+    github: "https://github.com/Nihala-ms",
   },
 ];
 const Projects = () => {
