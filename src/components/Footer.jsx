@@ -1,51 +1,78 @@
-import { FaGithub, FaLinkedin, FaArrowUp } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-const Footer = () => {
+function Footer() {
+  const backToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <footer className="bg-slate-950 border-t border-slate-800 py-10">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+    <footer className="bg-[#17151f] px-5 py-10 text-white sm:px-8 lg:px-12">
 
-        <div>
-          <h2 className="text-2xl font-bold">
-            NI<span className="text-cyan-400">HALA</span>
-          </h2>
+      <div className="mx-auto max-w-7xl">
 
-          <p className="text-gray-400 mt-2">
-            MERN Stack Developer
-          </p>
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+
+          <div>
+
+            <button
+              onClick={backToTop}
+              className="text-4xl font-black tracking-tight"
+            >
+              N<span className="text-purple-400">.</span>
+            </button>
+
+            <p className="mt-2 text-sm text-gray-500">
+              Designing & building digital experiences with purpose.
+            </p>
+
+          </div>
+
+          <div className="flex gap-3">
+
+            <a
+              href="https://github.com/Nihala-ms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-gray-400 transition hover:border-purple-400 hover:bg-purple-400 hover:text-white"
+            >
+              <FaGithub />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/nihala-ms/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-gray-400 transition hover:border-purple-400 hover:bg-purple-400 hover:text-white"
+            >
+              <FaLinkedin />
+            </a>
+
+          </div>
+
         </div>
 
-        <div className="flex gap-4">
+        <div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between">
 
-          <a
-            href="https://github.com/Nihala-ms"
-            className="w-11 h-11 rounded-full bg-slate-800 hover:bg-cyan-400 hover:text-black flex items-center justify-center transition"
-          >
-            <FaGithub />
-          </a>
+          <span>
+            © {new Date().getFullYear()} Nihala. All rights reserved.
+          </span>
 
-          <a
-            href="https://www.linkedin.com/in/nihala-ms/"
-            className="w-11 h-11 rounded-full bg-slate-800 hover:bg-cyan-400 hover:text-black flex items-center justify-center transition"
+          <button
+            onClick={backToTop}
+            className="text-left transition hover:text-white sm:text-right"
           >
-            <FaLinkedin />
-          </a>
-
-          <a
-            href="#home"
-            className="w-11 h-11 rounded-full bg-cyan-400 text-black flex items-center justify-center hover:scale-110 transition"
-          >
-            <FaArrowUp />
-          </a>
+            Back to top ↑
+          </button>
 
         </div>
+
       </div>
 
-      <p className="text-center text-gray-500 mt-8">
-        © 2026 Nihala. All rights reserved.
-      </p>
     </footer>
   );
-};
+}
 
 export default Footer;

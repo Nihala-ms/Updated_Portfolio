@@ -1,102 +1,116 @@
 import {
   FaEnvelope,
-  FaPhoneAlt,
-  FaMapMarkerAlt,
-  FaGithub,
   FaLinkedin,
+  FaGithub,
 } from "react-icons/fa";
 
-const Contact = () => {
+import { FiArrowUpRight } from "react-icons/fi";
+
+function Contact() {
   return (
-    <section id="contact" className="bg-slate-950 py-24">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <section
+      id="contact"
+      className="scroll-mt-24 bg-[#f8f7f4] px-5 py-24 sm:px-8 lg:px-12 lg:py-32"
+    >
 
-        {/* Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold">
-            Get In <span className="text-cyan-400">Touch</span>
-          </h2>
+      <div className="mx-auto max-w-7xl">
 
-          <div className="w-24 h-1 bg-cyan-400 rounded-full mx-auto mt-4"></div>
+        <div className="overflow-hidden rounded-[2.5rem] bg-[#17151f]">
 
-          <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
-            Have a project, internship, or job opportunity? Feel free to contact me.
-            I'm always open to discussing new opportunities.
-          </p>
-        </div>
+          <div className="grid lg:grid-cols-[1.2fr_.8fr]">
 
-        <div className="">
+            <div className="p-8 sm:p-12 lg:p-16">
 
-          {/* Left */}
-          <div className="space-y-6">
+              <p className="text-xs font-bold tracking-[0.3em] text-purple-300">
+                HAVE A PROJECT IN MIND?
+              </p>
 
-            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-cyan-400 transition gap-2">
-              <div className="flex items-center gap-4">
-                <FaEnvelope className="text-cyan-400 text-2xl" />
-                <div>
-                  <h3 className="font-semibold text-lg">Email</h3>
-                  <p className="text-gray-400">
-                    nihalabinthsalih@gmail.com
-                  </p>
-                </div>
-              </div>
-            </div>
+              <h2 className="mt-6 text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
+                Let's build
+                <br />
+                something
+                <br />
+                <span className="text-purple-300">
+                  great together.
+                </span>
+              </h2>
 
-            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-cyan-400 transition">
-              <div className="flex items-center gap-4">
-                <FaPhoneAlt className="text-cyan-400 text-2xl" />
-                <div>
-                  <h3 className="font-semibold text-lg">Phone</h3>
-                  <p className="text-gray-400">
-                    +91 9605947534
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-cyan-400 transition">
-              <div className="flex items-center gap-4">
-                <FaMapMarkerAlt className="text-cyan-400 text-2xl" />
-                <div>
-                  <h3 className="font-semibold text-lg">Location</h3>
-                  <p className="text-gray-400">
-                    Kerala, India
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <div className="flex gap-5 pt-4">
+              <p className="mt-7 max-w-xl text-sm leading-7 text-gray-400 sm:text-base">
+                I'm open to web development opportunities,
+                freelance projects and collaborations. If you have
+                an idea or opportunity, I'd love to hear from you.
+              </p>
 
               <a
-                href="https://github.com/Nihala-ms"
-                target="_blank"
-                rel="noreferrer"
-                className="w-12 h-12 rounded-full bg-slate-800 hover:bg-cyan-400 hover:text-black transition flex items-center justify-center text-xl"
+                href="mailto:nihalabinthsalih@gmail.com"
+                className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3.5 text-sm font-bold text-[#17151f] transition hover:bg-purple-200"
               >
-                <FaGithub />
+                <FaEnvelope />
+                nihalabinthsalih@gmail.com
               </a>
 
-              <a
-                href="https://www.linkedin.com/in/nihala-ms/"
-                target="_blank"
-                rel="noreferrer"
-                className="w-12 h-12 rounded-full bg-slate-800 hover:bg-cyan-400 hover:text-black transition flex items-center justify-center text-xl"
-              >
-                <FaLinkedin />
-              </a>
+            </div>
+
+            <div className="flex flex-col justify-end bg-white/5 p-8 sm:p-12 lg:p-10">
+
+              <p className="mb-5 text-[10px] font-bold tracking-[0.25em] text-gray-500">
+                FIND ME ONLINE
+              </p>
+
+              <div className="space-y-2">
+
+                <a
+                  href="https://www.linkedin.com/in/nihala-ms/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between rounded-2xl border border-white/10 px-5 py-4 text-white transition hover:bg-white/10"
+                >
+                  <span className="flex items-center gap-3">
+                    <FaLinkedin />
+                    LinkedIn
+                  </span>
+
+                  <FiArrowUpRight />
+                </a>
+
+                <a
+                  href="https://github.com/Nihala-ms"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between rounded-2xl border border-white/10 px-5 py-4 text-white transition hover:bg-white/10"
+                >
+                  <span className="flex items-center gap-3">
+                    <FaGithub />
+                    GitHub
+                  </span>
+
+                  <FiArrowUpRight />
+                </a>
+
+                <a
+                  href="mailto:nihalabinthsalih@gmail.com"
+                  className="flex items-center justify-between rounded-2xl border border-white/10 px-5 py-4 text-white transition hover:bg-white/10"
+                >
+                  <span className="flex items-center gap-3">
+                    <FaEnvelope />
+                    Email
+                  </span>
+
+                  <FiArrowUpRight />
+                </a>
+
+              </div>
 
             </div>
 
           </div>
 
-
         </div>
 
       </div>
+
     </section>
   );
-};
+}
 
 export default Contact;

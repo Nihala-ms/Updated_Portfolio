@@ -8,29 +8,15 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="bg-slate-950 text-white overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-[#f8f7f4] text-[#17151f]">
       <Navbar />
 
       <main>
-        <section id="home">
-          <Hero />
-        </section>
-
-        <section id="about">
-          <About />
-        </section>
-
-        <section id="skills">
-          <Skills />
-        </section>
-
-        <section id="projects">
-          <Projects />
-        </section>
-
-        <section id="contact">
-          <Contact />
-        </section>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
       </main>
 
       <Footer />

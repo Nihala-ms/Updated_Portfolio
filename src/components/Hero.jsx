@@ -1,401 +1,181 @@
 import {
   FaGithub,
   FaLinkedin,
-  FaArrowRight,
   FaReact,
   FaNodeJs,
 } from "react-icons/fa";
 
 import {
   SiMongodb,
-  SiExpress,
   SiJavascript,
+  SiExpress,
 } from "react-icons/si";
+
+import { FiArrowUpRight, FiDownload } from "react-icons/fi";
 
 import profileImage from "../assets/images/profile.jpeg";
 
-const Hero = () => {
+function Hero() {
+  const goToProjects = () => {
+    document.getElementById("projects")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden bg-slate-950"
+      className="relative flex min-h-screen items-center overflow-hidden px-5 pb-16 pt-32 sm:px-8 lg:px-12"
     >
-      {/* ================= BACKGROUND ================= */}
 
-      <div className="absolute -left-40 top-10 w-[500px] h-[500px] bg-cyan-500/10 blur-[150px] rounded-full"></div>
+      {/* Background decoration */}
+      <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-purple-200/40 blur-3xl" />
+      <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-violet-100/50 blur-3xl" />
 
-      <div className="absolute -right-40 bottom-0 w-[500px] h-[500px] bg-blue-500/10 blur-[150px] rounded-full"></div>
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1.1fr_.9fr]">
 
-      {/* Grid */}
-      <div
-        className="absolute inset-0 opacity-[0.035]
-        bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),
-        linear-gradient(to_bottom,#ffffff_1px,transparent_1px)]
-        bg-[size:60px_60px]"
-      ></div>
+        {/* LEFT */}
+        <div>
 
-      {/* ================= CONTENT ================= */}
+          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-green-200 bg-white px-4 py-2 text-xs font-semibold text-gray-600 shadow-sm">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
+            Available for opportunities
+          </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 py-24">
+          <p className="mb-3 text-sm font-bold tracking-[0.3em] text-[#6d28d9]">
+            HELLO, I'M
+          </p>
 
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          <h1 className="text-6xl font-black tracking-[-0.05em] text-[#17151f] sm:text-7xl lg:text-8xl">
+            Nihala
+            <span className="text-[#6d28d9]">.</span>
+          </h1>
 
-          {/* ================================================= */}
-          {/* LEFT CONTENT */}
-          {/* ================================================= */}
+          <div className="mt-5 flex items-center gap-3">
+            <span className="h-px w-10 bg-[#6d28d9]" />
 
-          <div className="max-w-2xl">
-
-            {/* Availability */}
-            <div
-              className="inline-flex items-center gap-2
-              px-4 py-2 rounded-full
-              bg-cyan-400/10
-              border border-cyan-400/20
-              text-cyan-300 text-sm font-medium"
-            >
-              <span className="relative flex h-2.5 w-2.5">
-                <span
-                  className="animate-ping absolute inline-flex
-                  h-full w-full rounded-full bg-cyan-400 opacity-75"
-                ></span>
-
-                <span
-                  className="relative inline-flex rounded-full
-                  h-2.5 w-2.5 bg-cyan-400"
-                ></span>
-              </span>
-
-              Open to Internship & Full-Time
-            </div>
-
-            {/* Greeting */}
-            <p
-              className="uppercase tracking-[0.35em]
-              text-cyan-400 text-sm font-semibold
-              mt-8"
-            >
-              Hello, I'm
-            </p>
-
-            {/* Name */}
-            <h1
-              className="mt-3
-              text-6xl sm:text-7xl lg:text-8xl
-              font-black tracking-tight
-              leading-[0.95]"
-            >
-              <span className="text-white">
-                NIHALA
-              </span>
-              <span className="text-cyan-400">.</span>
-            </h1>
-
-            {/* Role */}
-            <h2
-              className="mt-7
-              text-3xl sm:text-4xl
-              font-bold
-              leading-tight
-              bg-gradient-to-r
-              from-cyan-400
-              via-cyan-300
-              to-blue-500
-              bg-clip-text text-transparent"
-            >
+            <h2 className="text-xl font-bold text-gray-700 sm:text-2xl">
               MERN Stack Developer
             </h2>
+          </div>
 
-            {/* Description */}
-            <p
-              className="text-gray-400
-              mt-7 max-w-xl
-              text-base md:text-lg
-              leading-8"
+          <p className="mt-7 max-w-2xl text-base leading-8 text-gray-500 sm:text-lg">
+            I build modern, responsive and user-focused web applications
+            using React, Node.js, Express.js and MongoDB. I enjoy turning
+            ideas into clean digital experiences that are simple and
+            meaningful.
+          </p>
+
+          <div className="mt-9 flex flex-wrap gap-3">
+
+            <button
+              onClick={goToProjects}
+              className="flex items-center gap-2 rounded-full bg-[#17151f] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-black/10 transition hover:-translate-y-1 hover:bg-[#6d28d9]"
             >
-              I build modern, responsive and user-focused web applications
-              using React, Node.js, Express.js, MongoDB and Tailwind CSS.
-              Passionate about creating clean interfaces and meaningful
-              digital experiences.
+              Explore My Work
+              <FiArrowUpRight className="text-lg" />
+            </button>
+
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3.5 text-sm font-bold text-[#17151f] transition hover:-translate-y-1 hover:border-[#6d28d9] hover:text-[#6d28d9]"
+            >
+              Resume
+              <FiDownload />
+            </a>
+
+          </div>
+
+          <div className="mt-10 flex items-center gap-5">
+
+            <a
+              href="https://github.com/Nihala-ms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition hover:border-[#6d28d9] hover:bg-[#6d28d9] hover:text-white"
+            >
+              <FaGithub />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/nihala-ms/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition hover:border-[#6d28d9] hover:bg-[#6d28d9] hover:text-white"
+            >
+              <FaLinkedin />
+            </a>
+
+            <span className="text-[10px] font-bold tracking-[0.25em] text-gray-400">
+              CONNECT WITH ME
+            </span>
+
+          </div>
+        </div>
+
+        {/* RIGHT */}
+        <div className="relative mx-auto w-full max-w-[470px]">
+
+          {/* Main image */}
+          <div className="relative overflow-hidden rounded-[2rem] border border-white bg-white p-3 shadow-2xl shadow-purple-900/10">
+
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-gray-100">
+
+              <img
+                src={profileImage}
+                alt="Nihala"
+                className="h-full w-full object-cover"
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="text-[10px] font-bold tracking-[0.25em] text-white/60">
+                  CURRENTLY
+                </p>
+
+                <p className="mt-2 text-xl font-bold leading-tight text-white">
+                  Building meaningful
+                  <br />
+                  web experiences.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          {/* Floating technology card */}
+          <div className="absolute -bottom-7 -left-5 rounded-2xl border border-white bg-white p-4 shadow-xl sm:-left-10">
+
+            <p className="mb-3 text-[9px] font-bold tracking-[0.2em] text-gray-400">
+              MY STACK
             </p>
 
-            {/* ================= BUTTONS ================= */}
+            <div className="flex gap-3">
 
-            <div className="flex flex-wrap gap-4 mt-9">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-500">
+                <FaReact />
+              </span>
 
-              {/* Projects */}
-              <a
-                href="#projects"
-                className="group inline-flex items-center gap-3
-                bg-cyan-400
-                hover:bg-cyan-300
-                text-slate-950
-                font-semibold
-                px-7 py-3.5
-                rounded-xl
-                transition-all duration-300
-                hover:-translate-y-1
-                hover:shadow-[0_10px_30px_rgba(34,211,238,0.25)]"
-              >
-                View Projects
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-50 text-green-600">
+                <FaNodeJs />
+              </span>
 
-                <FaArrowRight
-                  className="group-hover:translate-x-1
-                  transition-transform duration-300"
-                />
-              </a>
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-yellow-50 text-yellow-500">
+                <SiJavascript />
+              </span>
 
-              {/* Resume */}
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center
-                border border-slate-700
-                bg-slate-900/50
-                text-gray-200
-                font-medium
-                px-7 py-3.5
-                rounded-xl
-                hover:border-cyan-400
-                hover:text-cyan-400
-                transition-all duration-300
-                hover:-translate-y-1"
-              >
-                View CV
-              </a>
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-50 text-green-600">
+                <SiMongodb />
+              </span>
 
             </div>
-
-            {/* ================= SOCIAL ================= */}
-
-            <div className="flex items-center gap-3 mt-9">
-
-              <a
-                href="https://github.com/Nihala-ms"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="w-11 h-11
-                flex items-center justify-center
-                rounded-xl
-                bg-slate-900
-                border border-slate-800
-                text-gray-400
-                hover:text-cyan-400
-                hover:border-cyan-400/50
-                hover:-translate-y-1
-                transition-all duration-300"
-              >
-                <FaGithub className="text-lg" />
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/nihala-ms/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="w-11 h-11
-                flex items-center justify-center
-                rounded-xl
-                bg-slate-900
-                border border-slate-800
-                text-gray-400
-                hover:text-cyan-400
-                hover:border-cyan-400/50
-                hover:-translate-y-1
-                transition-all duration-300"
-              >
-                <FaLinkedin className="text-lg" />
-              </a>
-
-            </div>
-
-            {/* ================= STATS ================= */}
-
-            <div
-              className="flex flex-wrap
-              items-center gap-8
-              mt-12 pt-7
-              border-t border-slate-800/80"
-            >
-
-              <div>
-                <h3 className="text-2xl font-bold text-white">
-                  6+
-                </h3>
-
-                <p className="text-gray-500 text-sm mt-1">
-                  Projects
-                </p>
-              </div>
-
-              <div className="w-px h-10 bg-slate-800"></div>
-
-              <div>
-                <h3 className="text-2xl font-bold text-white">
-                  15+
-                </h3>
-
-                <p className="text-gray-500 text-sm mt-1">
-                  Technologies
-                </p>
-              </div>
-
-              <div className="w-px h-10 bg-slate-800"></div>
-
-              <div>
-                <h3 className="text-2xl font-bold text-white">
-                  100%
-                </h3>
-
-                <p className="text-gray-500 text-sm mt-1">
-                  Dedication
-                </p>
-              </div>
-
-            </div>
-
           </div>
 
-          {/* ================================================= */}
-          {/* RIGHT - PROFILE */}
-          {/* ================================================= */}
-
-          <div className="relative flex justify-center lg:justify-end">
-
-            <div className="relative w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] lg:w-[460px] lg:h-[460px]">
-
-              {/* Large Glow */}
-              <div
-                className="absolute inset-8
-                bg-cyan-400/10
-                blur-[80px]
-                rounded-full"
-              ></div>
-
-              {/* Outer Ring */}
-              <div
-                className="absolute inset-0
-                rounded-full
-                border border-cyan-400/20"
-              ></div>
-
-              {/* Dashed Ring */}
-              <div
-                className="absolute -inset-4
-                rounded-full
-                border border-dashed
-                border-cyan-400/20
-                animate-[spin_30s_linear_infinite]"
-              ></div>
-
-              {/* Image Container */}
-              <div
-                className="absolute inset-7
-                rounded-full
-                overflow-hidden
-                border border-cyan-400/40
-                shadow-[0_0_80px_rgba(34,211,238,0.18)] bg-gray-300"
-              >
-
-                <img
-                  src={profileImage}
-                  alt="Nihala - MERN Stack Developer"
-                  className="w-full h-full
-                  object-cover
-                  transition-transform
-                  duration-700
-                  hover:scale-105"
-                />
-
-              </div>
-
-              {/* ================= FLOATING TECH ICONS ================= */}
-
-              {/* React */}
-              <div
-                className="absolute top-10 -left-2
-                w-14 h-14
-                flex items-center justify-center
-                rounded-2xl
-                bg-slate-900
-                border border-slate-700
-                shadow-xl
-                text-cyan-400
-                animate-bounce"
-                style={{ animationDuration: "3s" }}
-              >
-                <FaReact className="text-2xl" />
-              </div>
-
-              {/* Node */}
-              <div
-                className="absolute top-24 -right-4
-                w-14 h-14
-                flex items-center justify-center
-                rounded-2xl
-                bg-slate-900
-                border border-slate-700
-                shadow-xl
-                text-green-400
-                animate-bounce"
-                style={{ animationDuration: "4s" }}
-              >
-                <FaNodeJs className="text-2xl" />
-              </div>
-
-              {/* MongoDB */}
-              <div
-                className="absolute bottom-20 -left-5
-                w-14 h-14
-                flex items-center justify-center
-                rounded-2xl
-                bg-slate-900
-                border border-slate-700
-                shadow-xl
-                text-green-400
-                animate-bounce"
-                style={{ animationDuration: "3.5s" }}
-              >
-                <SiMongodb className="text-2xl" />
-              </div>
-
-              {/* JavaScript */}
-              <div
-                className="absolute bottom-8 right-8
-                w-14 h-14
-                flex items-center justify-center
-                rounded-2xl
-                bg-slate-900
-                border border-slate-700
-                shadow-xl
-                text-yellow-400
-                animate-bounce"
-                style={{ animationDuration: "4.5s" }}
-              >
-                <SiJavascript className="text-2xl" />
-              </div>
-
-              {/* Express */}
-              <div
-                className="absolute bottom-1/2 -right-7
-                translate-y-1/2
-                w-12 h-12
-                flex items-center justify-center
-                rounded-xl
-                bg-slate-900
-                border border-slate-700
-                shadow-xl
-                text-gray-300
-                text-xs font-bold"
-              >
-                EX
-              </div>
-
-            </div>
-
-          </div>
+          {/* Express badge */}
+          
 
         </div>
 
@@ -403,6 +183,6 @@ const Hero = () => {
 
     </section>
   );
-};
+}
 
 export default Hero;
