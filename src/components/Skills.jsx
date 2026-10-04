@@ -37,7 +37,7 @@ function Skills() {
   return (
     <section
       id="skills"
-      className="scroll-mt-24 bg-[#f8f7f4] px-5 py-24 sm:px-8 lg:px-12 lg:py-32"
+      className="scroll-mt-24 bg-[#0f0d14] px-5 py-24 text-white sm:px-8 lg:px-12 lg:py-32"
     >
 
       <div className="mx-auto max-w-7xl">
@@ -45,20 +45,20 @@ function Skills() {
         <div className="grid gap-8 lg:grid-cols-[1fr_.8fr] lg:items-end">
 
           <div>
-            <p className="mb-4 text-xs font-bold tracking-[0.3em] text-[#6d28d9]">
+            <p className="mb-4 text-xs font-bold tracking-[0.3em] text-[#a78bfa]">
               MY TOOLKIT
             </p>
 
-            <h2 className="text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
+            <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
               Skills that turn
               <br />
-              <span className="text-[#6d28d9]">
+              <span className="text-[#a78bfa]">
                 ideas into code.
               </span>
             </h2>
           </div>
 
-          <p className="max-w-lg text-base leading-8 text-gray-500">
+          <p className="max-w-lg text-base leading-8 text-gray-400">
             Technologies I use to design, develop and deploy
             modern web applications.
           </p>
@@ -67,7 +67,8 @@ function Skills() {
 
         <div className="mt-16 grid gap-10 lg:grid-cols-[.65fr_1.35fr]">
 
-          <div className="rounded-[2rem] bg-[#17151f] p-8 text-white sm:p-10">
+          {/* Introduction Card */}
+          <div className="rounded-[2rem] bg-[#17151f] p-8 text-white shadow-xl shadow-black/20 sm:p-10">
 
             <span className="text-xs font-bold tracking-[0.2em] text-purple-300">
               02
@@ -89,23 +90,24 @@ function Skills() {
 
           </div>
 
+          {/* Skills */}
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
 
             {skills.map(([name, icon]) => (
               <div
                 key={name}
-                className="group rounded-2xl border border-gray-200 bg-white p-5 transition duration-300 hover:-translate-y-1 hover:border-purple-200 hover:shadow-xl hover:shadow-purple-900/5"
+                className="group rounded-2xl border border-white/10 bg-[#17151f] p-5 transition duration-300 hover:-translate-y-1 hover:border-purple-500/30 hover:bg-[#1d1a26] hover:shadow-xl hover:shadow-purple-900/10"
               >
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f8f7f4] text-2xl text-[#6d28d9] transition group-hover:bg-[#6d28d9] group-hover:text-white">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0f0d14] text-2xl text-[#a78bfa] transition group-hover:bg-[#6d28d9] group-hover:text-white">
                   {icon}
                 </div>
 
-                <h4 className="mt-5 text-sm font-bold">
+                <h4 className="mt-5 text-sm font-bold text-white">
                   {name}
                 </h4>
 
-                <p className="mt-1 text-[9px] font-bold tracking-[0.15em] text-gray-400">
+                <p className="mt-1 text-[9px] font-bold tracking-[0.15em] text-gray-500">
                   TECHNOLOGY
                 </p>
 
