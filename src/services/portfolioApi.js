@@ -14,11 +14,14 @@ export async function sendPortfolioMessage(message) {
     }
   );
 
-  const data = await response.json();
+  const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    throw new Error(data.error || "Unable to get an AI response.");
+    throw new Error(
+      data.error || "Unable to get an AI response."
+    );
   }
 
   return data.reply;
 }
+
