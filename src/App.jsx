@@ -39,7 +39,7 @@ import profile from "./assets/images/profile.jpeg";
 ========================================================= */
 
 const API_BASE_URL = (
-  import.meta.env.VITE_API_BASE_URL || "https://portfolio-updated-m637pl9qs-nihala-ms-projects.vercel.app"
+  import.meta.env.VITE_API_BASE_URL || "https://portfolio-updated-chcaihqwn-nihala-ms-projects.vercel.app"
 ).replace(/\/+$/, "");
 
 async function apiRequest(endpoint, options = {}) {
