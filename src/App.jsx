@@ -961,40 +961,42 @@ export default function App() {
 
                   {/* PROFILE PHOTO */}
 
-                  <div className="relative mx-auto w-full max-w-[330px]">
-                    <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-violet-200 to-fuchsia-100 opacity-70 blur-xl" />
+{/* PROFILE VISUAL — clean professional version */}
+<div className="relative mx-auto w-full max-w-[330px]">
+  <div className="relative overflow-hidden rounded-2xl border border-violet-100 bg-white p-8 text-center shadow-lg shadow-violet-100/60">
 
-                    <div className="float-slow relative rounded-[1.7rem] border border-white bg-white p-2 shadow-xl shadow-violet-200/60">
-                      <div className="relative aspect-[4/4.5] overflow-hidden rounded-[1.3rem] bg-gradient-to-br from-violet-200 to-fuchsia-100">
-                        <img
-                          src={profile}
-                          alt="Nihala's profile"
-                          className="h-full w-full object-cover object-center"
-                        />
+    <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-violet-100 text-3xl font-bold text-violet-700">
+      N
+    </div>
 
-                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#24183c]/90 to-transparent p-5 pt-16 text-white">
-                          <p className="text-[10px] font-bold uppercase tracking-[.22em] text-violet-100">
-                            Developer · Learner · Creator
-                          </p>
+    <h3 className="mt-5 text-2xl font-bold tracking-tight text-gray-900">
+      Nihala M. S.
+    </h3>
 
-                          <p className="mt-2 text-xl font-bold">
-                            Nihala M. S.
-                          </p>
+    <p className="mt-2 text-sm font-medium text-violet-600">
+      MERN Stack Developer
+    </p>
 
-                          <p className="mt-1 text-xs text-white/75">
-                            MERN Stack Developer
-                          </p>
-                        </div>
+    <p className="mx-auto mt-4 max-w-[240px] text-sm leading-6 text-gray-500">
+      Building responsive web applications with modern technologies.
+    </p>
 
-                        
-                      </div>
-                    </div>
+    <div className="mt-6 flex items-center justify-center gap-4 text-2xl">
+      <FaReact className="text-cyan-600" />
+      <FaNodeJs className="text-green-600" />
+      <SiMongodb className="text-emerald-600" />
+      <SiJavascript className="text-amber-500" />
+    </div>
 
-                    
+    <div className="mt-6 border-t border-gray-100 pt-4">
+      <span className="inline-flex items-center gap-2 text-sm font-medium text-gray-600">
+        <span className="h-2 w-2 rounded-full bg-green-500"></span>
+        Open to opportunities
+      </span>
+    </div>
 
-                    
-                  </div>
-                </div>
+  </div>
+</div>                </div>
               </div>
 
               {/* PROFILE STATS */}
