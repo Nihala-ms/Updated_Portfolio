@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import {
   ArrowDownRight,
   ArrowUpRight,
+  Award,
+  BookOpen,
   Bot,
   BriefcaseBusiness,
   Check,
@@ -22,6 +24,8 @@ import {
   Sparkles,
   Terminal,
   X,
+  ChartNoAxesCombined,
+  Globe,
 } from "lucide-react";
 
 import { FaGithub, FaLinkedinIn, FaReact, FaNodeJs } from "react-icons/fa";
@@ -32,14 +36,13 @@ import {
   SiTailwindcss,
 } from "react-icons/si";
 
-import profile from "./assets/images/profile.jpeg";
-
 /* =========================================================
    BACKEND CONFIGURATION
 ========================================================= */
 
 const API_BASE_URL = (
-  import.meta.env.VITE_API_BASE_URL || "https://portfolio-updated-chcaihqwn-nihala-ms-projects.vercel.app"
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://portfolio-updated-chcaihqwn-nihala-ms-projects.vercel.app"
 ).replace(/\/+$/, "");
 
 async function apiRequest(endpoint, options = {}) {
@@ -104,6 +107,49 @@ const projects = [
     accent: "from-sky-100 via-indigo-50 to-white",
     live: "https://tripmate-apps-gabtqr3wl-nihala-ms-projects.vercel.app/",
     github: "https://github.com/Nihala-ms/tripmate",
+  },
+
+  // These two projects are intentionally placed early
+  // so they appear in the second row on wide desktop screens.
+
+  {
+    number: "13",
+    title: "PDF Lite",
+    type: "PDF compression tool",
+    description:
+      "A browser-based PDF compression tool with multiple optimization options. Files stay on the user's device. Practiced SEO, GA4 event tracking, and privacy-conscious analytics implementation.",
+    tech: [
+      "React",
+      "JavaScript",
+      "Google Analytics 4",
+      "Event Tracking",
+      "SEO",
+    ],
+    icon: "pdf",
+    accent: "from-sky-100 via-violet-50 to-white",
+    live: "https://pdf-lite-two.vercel.app/?utm_source=portfolio&utm_medium=project&utm_campaign=pdflite_launch",
+    github: "",
+  },
+  {
+    number: "14",
+    title: "Everyday Kitchens",
+    type: "Recipe website",
+    description:
+      "A recipe discovery website with category browsing and detailed recipe pages. Practiced technical SEO, Google Search Console, sitemap submission, Recipe structured data, and GA4 measurement.",
+    tech: [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "TypeScript",
+      "MongoDB",
+      "Google Analytics 4",
+      "Google Search Console",
+      "Recipe Schema",
+    ],
+    icon: "kitchen",
+    accent: "from-emerald-100 via-green-50 to-white",
+    live: "https://everyday-kitchens.vercel.app/?utm_source=portfolio&utm_medium=project&utm_campaign=everyday_kitchens_launch",
+    github: "https://github.com/Nihala-ms/Everyday-kitchen",
   },
   {
     number: "04",
@@ -216,6 +262,58 @@ const projects = [
 ];
 
 /* =========================================================
+   CERTIFICATIONS
+========================================================= */
+
+const certifications = [
+  {
+    number: "01",
+    title: "Fundamentals of Digital Marketing",
+    organization: "Google Skillshop",
+    year: "2026",
+    description:
+      "Completed foundational learning in digital marketing concepts and online marketing practices.",
+    icon: "google",
+  },
+  {
+    number: "02",
+    title: "MERN Stack Development Course & Internship Program",
+    organization: "Luminar Technolab",
+    year: "2025–2026",
+    description:
+      "Training in modern full-stack web development using React, Node.js, Express, and MongoDB.",
+    icon: "mern",
+  },
+  {
+    number: "03",
+    title: "Python Django Course",
+    organization: "Vidhya Academy of Science and Technology",
+    year: "2024",
+    description:
+      "Completed Python Django course training through the institution's IT centre.",
+    icon: "python",
+  },
+  {
+    number: "04",
+    title: "Office Automation",
+    organization: "Little Flower College, Guruvayoor",
+    year: "",
+    description:
+      "Completed Office Automation training during college studies.",
+    icon: "office",
+  },
+  {
+    number: "05",
+    title: "A Comprehensive Study on Prompt Engineering",
+    organization: "Research Paper Publication",
+    year: "",
+    description:
+      "Published a research paper exploring prompt engineering and its applications.",
+    icon: "research",
+  },
+];
+
+/* =========================================================
    DEVELOPER JOURNEY
 ========================================================= */
 
@@ -281,6 +379,22 @@ const skillGroups = [
       "Responsive Design",
     ],
   },
+  {
+    title: "SEO & Analytics",
+    description:
+      "Practical website optimization, measurement, and search visibility.",
+    skills: [
+      "Google Analytics 4",
+      "Google Search Console",
+      "On-page SEO",
+      "Technical SEO",
+      "Keyword Research",
+      "UTM Tracking",
+      "Event Tracking",
+      "XML Sitemap",
+      "Structured Data",
+    ],
+  },
 ];
 
 const techStack = [
@@ -342,12 +456,28 @@ function ProjectIcon({ type }) {
   if (type === "aspire") return <GraduationCap size={34} />;
   if (type === "ecommerce") return <BriefcaseBusiness size={34} />;
   if (type === "recipe") return <Compass size={34} />;
+  if (type === "pdf") return <FileText size={34} />;
+  if (type === "kitchen") return <BookOpen size={34} />;
 
   return <MessageCircle size={34} />;
 }
 
 /* =========================================================
-   PORTFOLIO TWIN - BACKEND CONNECTED
+   CERTIFICATION ICONS
+========================================================= */
+
+function CertificationIcon({ type }) {
+  if (type === "google") return <Award size={23} />;
+  if (type === "mern") return <Code2 size={23} />;
+  if (type === "python") return <Terminal size={23} />;
+  if (type === "office") return <FileText size={23} />;
+  if (type === "research") return <BookOpen size={23} />;
+
+  return <GraduationCap size={23} />;
+}
+
+/* =========================================================
+   PORTFOLIO TWIN - BACKEND CONNECTED SIDE CHAT
 ========================================================= */
 
 function PortfolioAssistant({ onClose }) {
@@ -362,64 +492,79 @@ function PortfolioAssistant({ onClose }) {
     },
   ]);
 
+  async function sendMessage(text = question) {
+    const clean = text.trim();
 
-async function sendMessage(text = question) {
-  const clean = text.trim();
+    if (!clean || loading) return;
 
-  if (!clean || loading) return;
-
-  setError("");
-  setQuestion("");
-
-  setMessages((current) => [
-    ...current,
-    { role: "user", text: clean },
-  ]);
-
-  setLoading(true);
-
-  try {
-    const data = await apiRequest("/api/portfolio/chat", {
-      method: "POST",
-      body: JSON.stringify({
-        message: clean,
-      }),
-    });
-
-    if (typeof data.reply !== "string" || !data.reply.trim()) {
-      throw new Error(
-        "The server responded, but no AI reply was received."
-      );
-    }
+    setError("");
+    setQuestion("");
 
     setMessages((current) => [
       ...current,
-      { role: "assistant", text: data.reply.trim() },
+      { role: "user", text: clean },
     ]);
-  } catch (err) {
-    console.error("Portfolio Twin error:", err);
 
-    setError(
-      err.message ||
-        "Unable to contact the AI assistant. Please try again."
-    );
-  } finally {
-    setLoading(false);
+    setLoading(true);
+
+    try {
+      const data = await apiRequest("/api/portfolio/chat", {
+        method: "POST",
+        body: JSON.stringify({
+          message: clean,
+        }),
+      });
+
+      if (typeof data.reply !== "string" || !data.reply.trim()) {
+        throw new Error(
+          "The server responded, but no AI reply was received."
+        );
+      }
+
+      setMessages((current) => [
+        ...current,
+        { role: "assistant", text: data.reply.trim() },
+      ]);
+    } catch (err) {
+      console.error("Portfolio Twin error:", err);
+
+      setError(
+        err.message ||
+          "Unable to contact the AI assistant. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#211633]/40 p-4 backdrop-blur-sm">
-      <div className="flex max-h-[86vh] w-full max-w-lg flex-col overflow-hidden rounded-3xl border border-violet-100 bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-violet-100 p-5">
+    <>
+      {/* Backdrop for small screens */}
+      <button
+        type="button"
+        aria-label="Close Portfolio Twin"
+        onClick={onClose}
+        className="fixed inset-0 z-[80] bg-[#211633]/25 backdrop-blur-[2px] sm:bg-transparent sm:backdrop-blur-0"
+      />
+
+      {/* Side chat panel */}
+      <section
+        role="dialog"
+        aria-label="Portfolio Twin chat"
+        className="fixed bottom-4 right-4 z-[90] flex h-[min(680px,calc(100vh-2rem))] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-3xl border border-violet-100 bg-white shadow-2xl shadow-violet-950/20 sm:bottom-6 sm:right-6"
+      >
+        <div className="flex items-center justify-between border-b border-violet-100 bg-white p-4 sm:p-5">
           <div className="flex items-center gap-3">
             <div className="rounded-2xl bg-violet-100 p-3 text-violet-700">
               <Bot size={22} />
             </div>
 
             <div>
-              <h3 className="font-bold text-[#302342]">Portfolio Twin</h3>
-              <p className="text-xs text-[#8c809c]">
+              <h3 className="font-bold text-[#302342]">
+                Portfolio Twin
+              </h3>
+              <p className="mt-0.5 flex items-center gap-1.5 text-xs text-[#8c809c]">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 Ask about my developer profile
               </p>
             </div>
@@ -428,13 +573,13 @@ async function sendMessage(text = question) {
           <button
             onClick={onClose}
             aria-label="Close assistant"
-            className="rounded-xl p-2 text-[#786d89] hover:bg-violet-50"
+            className="rounded-xl p-2 text-[#786d89] transition hover:bg-violet-50 hover:text-violet-700"
           >
             <X size={20} />
           </button>
         </div>
 
-        <div className="flex-1 space-y-3 overflow-y-auto p-5">
+        <div className="flex-1 space-y-3 overflow-y-auto bg-[#fdfbff] p-4 sm:p-5">
           {messages.map((message, index) => (
             <div
               key={`${message.role}-${index}`}
@@ -445,8 +590,8 @@ async function sendMessage(text = question) {
               <div
                 className={`max-w-[88%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-6 ${
                   message.role === "user"
-                    ? "bg-violet-600 text-white"
-                    : "border border-violet-100 bg-violet-50 text-[#554967]"
+                    ? "rounded-br-md bg-violet-600 text-white"
+                    : "rounded-bl-md border border-violet-100 bg-white text-[#554967] shadow-sm"
                 }`}
               >
                 {message.text}
@@ -456,7 +601,7 @@ async function sendMessage(text = question) {
 
           {loading && (
             <div className="flex justify-start">
-              <div className="rounded-2xl border border-violet-100 bg-violet-50 px-4 py-3 text-sm text-violet-700">
+              <div className="rounded-2xl border border-violet-100 bg-white px-4 py-3 text-sm text-violet-700">
                 <span className="inline-flex items-center gap-2">
                   <span className="h-2 w-2 animate-pulse rounded-full bg-violet-500" />
                   Portfolio Twin is thinking...
@@ -481,7 +626,7 @@ async function sendMessage(text = question) {
           )}
 
           {messages.length === 1 && (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 pt-2">
               {[
                 "What are her skills?",
                 "Show me projects",
@@ -491,7 +636,7 @@ async function sendMessage(text = question) {
                   key={item}
                   disabled={loading}
                   onClick={() => sendMessage(item)}
-                  className="rounded-full border border-violet-200 px-3 py-2 text-xs text-violet-700 hover:bg-violet-50 disabled:opacity-50"
+                  className="rounded-full border border-violet-200 bg-white px-3 py-2 text-xs text-violet-700 transition hover:bg-violet-50 disabled:opacity-50"
                 >
                   {item}
                 </button>
@@ -505,31 +650,31 @@ async function sendMessage(text = question) {
             event.preventDefault();
             sendMessage();
           }}
-          className="flex gap-2 border-t border-violet-100 p-4"
+          className="flex gap-2 border-t border-violet-100 bg-white p-3 sm:p-4"
         >
           <input
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
             placeholder="Ask about Nihala..."
             disabled={loading}
-            className="min-w-0 flex-1 rounded-xl border border-violet-100 px-4 py-3 text-sm outline-none focus:border-violet-400 disabled:bg-gray-50"
+            className="min-w-0 flex-1 rounded-xl border border-violet-100 px-4 py-3 text-sm outline-none transition focus:border-violet-400 disabled:bg-gray-50"
           />
 
           <button
             type="submit"
             disabled={loading || !question.trim()}
             aria-label="Send question"
-            className="rounded-xl bg-violet-600 p-3 text-white hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-xl bg-violet-600 p-3 text-white transition hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Send size={18} />
           </button>
         </form>
 
-        <p className="px-4 pb-3 text-center text-[10px] text-[#a398b1]">
+        <p className="bg-white px-4 pb-3 text-center text-[10px] text-[#a398b1]">
           Connected to the Portfolio API
         </p>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
 
@@ -588,6 +733,7 @@ export default function App() {
   function goTo(id) {
     if (id === "ai-twin") {
       setAssistantOpen(true);
+      setMenuOpen(false);
       return;
     }
 
@@ -642,9 +788,10 @@ export default function App() {
 
   const nav = [
     { id: "overview", label: "Overview", icon: Layers3 },
-    { id: "project-lab", label: "Project Lab", icon: BriefcaseBusiness },
-    { id: "developer-stack", label: "Developer Stack", icon: Terminal },
-    { id: "journey-map", label: "Journey Map", icon: GraduationCap },
+    { id: "project-lab", label: "Projects", icon: BriefcaseBusiness },
+    { id: "developer-stack", label: "Skills", icon: Terminal },
+    { id: "journey-map", label: "Education", icon: GraduationCap },
+    { id: "certifications", label: "Certifications", icon: Award },
     { id: "contact", label: "Contact", icon: Mail },
   ];
 
@@ -655,16 +802,16 @@ export default function App() {
       title: "Project Lab",
       desc: "Explore builds, tools, and live demos.",
       icon: BriefcaseBusiness,
-      tag: "12 projects",
+      tag: "14 projects",
       tone: "bg-violet-50 text-violet-700",
     },
     {
       id: "developer-stack",
       code: "02",
       title: "Developer Stack",
-      desc: "The technologies I use and keep learning.",
+      desc: "Development technologies, SEO, and analytics.",
       icon: Terminal,
-      tag: "MERN + more",
+      tag: "Tech + Analytics",
       tone: "bg-sky-50 text-sky-700",
     },
     {
@@ -677,8 +824,17 @@ export default function App() {
       tone: "bg-emerald-50 text-emerald-700",
     },
     {
-      id: "ai-twin",
+      id: "certifications",
       code: "04",
+      title: "Certifications",
+      desc: "Courses, training, and research achievements.",
+      icon: Award,
+      tag: "5 achievements",
+      tone: "bg-amber-50 text-amber-700",
+    },
+    {
+      id: "ai-twin",
+      code: "05",
       title: "Portfolio Twin",
       desc: "Ask a question about my profile using the backend.",
       icon: Sparkles,
@@ -728,881 +884,930 @@ export default function App() {
         }
       `}</style>
 
-      <div className="mx-auto flex min-h-screen max-w-[1600px]">
-        {/* DESKTOP SIDEBAR */}
+      <div className="mx-auto min-h-screen max-w-[1600px]">
+        {/* TOP NAVIGATION */}
 
-        <aside className="sticky top-0 hidden h-screen w-[250px] shrink-0 flex-col border-r border-violet-100 bg-white/85 px-5 py-7 lg:flex">
-          <button
-            onClick={() => goTo("overview")}
-            className="flex items-center gap-3 text-left"
-          >
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-600 text-lg font-black text-white shadow-lg shadow-violet-200">
-              N.
-            </span>
-
-            <span>
-              <span className="block font-bold">Nihala M. S.</span>
-              <span className="mt-0.5 block text-[10px] uppercase tracking-[.16em] text-[#9689a9]">
-                Mern stack Developer
+        <header className="sticky top-0 z-40 border-b border-violet-100 bg-[#faf8ff]/95 backdrop-blur-xl">
+          <div className="flex min-h-[72px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-10">
+            <button
+              onClick={() => goTo("overview")}
+              className="flex shrink-0 items-center gap-3 text-left"
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-600 text-lg font-black text-white shadow-lg shadow-violet-200">
+                N.
               </span>
-            </span>
-          </button>
 
-          <div className="mt-10">
-            <p className="mb-3 px-3 text-[10px] font-bold uppercase tracking-[.2em] text-[#a398b1]">
-              Explore portfolio
-            </p>
+              <span>
+                <span className="block text-sm font-bold text-[#302342]">
+                  Nihala M. S.
+                </span>
+                <span className="hidden text-[10px] uppercase tracking-[.15em] text-[#9689a9] sm:block">
+                  MERN Stack Developer
+                </span>
+              </span>
+            </button>
 
-            <nav className="space-y-1">
-              {nav.map(({ id, label, icon: Icon }) => (
+            <nav className="hidden items-center gap-1 xl:flex">
+              {nav.map(({ id, label }) => (
                 <button
                   key={id}
                   onClick={() => goTo(id)}
-                  className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition ${
+                  className={`whitespace-nowrap rounded-lg px-3 py-2 text-xs font-semibold transition ${
                     activePanel === id
-                      ? "bg-violet-600 font-semibold text-white shadow-md shadow-violet-200"
+                      ? "bg-violet-600 text-white"
                       : "text-[#756985] hover:bg-violet-50 hover:text-violet-700"
                   }`}
                 >
-                  <Icon size={17} />
                   {label}
-                  <ChevronRight size={14} className="ml-auto opacity-50" />
                 </button>
               ))}
             </nav>
+
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+              <span className="hidden items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700 sm:flex">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                Available now
+              </span>
+
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl border border-violet-200 bg-white px-3 py-2.5 text-xs font-semibold text-violet-700 transition hover:bg-violet-50 sm:px-4"
+              >
+                <FileText size={15} />
+                Resume
+              </a>
+
+              <button
+                onClick={() => setMenuOpen((value) => !value)}
+                className="rounded-xl border border-violet-100 bg-white p-2.5 xl:hidden"
+                aria-label="Toggle navigation"
+                aria-expanded={menuOpen}
+              >
+                {menuOpen ? <X size={18} /> : <Menu size={18} />}
+              </button>
+            </div>
           </div>
 
-          <div className="mt-auto rounded-2xl border border-violet-100 bg-gradient-to-br from-violet-50 to-fuchsia-50 p-4">
-            <div className="flex items-center gap-2 text-xs font-bold text-violet-700">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              OPEN TO OPPORTUNITIES
-            </div>
-
-            <p className="mt-3 text-sm font-semibold">
-              Ready for my next chapter.
-            </p>
-
-            <p className="mt-1 text-xs leading-5 text-[#8a7d9d]">
-              React · Frontend · MERN roles
-            </p>
-
-            <button
-              onClick={() => goTo("contact")}
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-white px-3 py-2.5 text-xs font-semibold text-violet-700 shadow-sm hover:bg-violet-100"
-            >
-              Let's connect <ArrowUpRight size={14} />
-            </button>
-          </div>
-        </aside>
-
-        <div className="min-w-0 flex-1">
-          {/* TOP NAVIGATION */}
-
-          <header className="sticky top-0 z-40 border-b border-violet-100 bg-[#faf8ff]/90 backdrop-blur-xl">
-            <div className="flex h-[72px] items-center justify-between px-5 sm:px-8 lg:px-10">
-              <div className="flex items-center gap-3 lg:hidden">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-600 font-black text-white">
-                  N.
-                </span>
-
-                <span className="font-bold">
-                  Nihala <span className="text-violet-600">/ portfolio</span>
-                </span>
-              </div>
-
-              <div className="hidden items-center gap-2 text-sm text-[#8c809b] lg:flex">
-                <span className="font-mono text-violet-500">
-                  ~/portfolio
-                </span>
-                <span>/</span>
-                <span className="font-semibold text-[#514462]">
-                  {nav.find((item) => item.id === activePanel)?.label ||
-                    "Overview"}
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2 sm:gap-3">
-                <span className="hidden items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700 sm:flex">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  Available now
-                </span>
-
-                <a
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border border-violet-200 bg-white px-3 py-2.5 text-xs font-semibold text-violet-700 transition hover:bg-violet-50 sm:px-4"
-                >
-                  <FileText size={15} />
-                  Resume
-                </a>
-
-                <button
-                  onClick={() => setMenuOpen((value) => !value)}
-                  className="rounded-xl border border-violet-100 bg-white p-2.5 lg:hidden"
-                  aria-label="Toggle navigation"
-                >
-                  {menuOpen ? <X size={18} /> : <Menu size={18} />}
-                </button>
-              </div>
-            </div>
-
-            {menuOpen && (
-              <div className="border-t border-violet-100 bg-white p-3 lg:hidden">
+          {menuOpen && (
+            <div className="border-t border-violet-100 bg-white p-3 xl:hidden">
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                 {nav.map(({ id, label, icon: Icon }) => (
                   <button
                     key={id}
                     onClick={() => goTo(id)}
-                    className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm text-[#756985] hover:bg-violet-50"
+                    className={`flex items-center gap-2 rounded-xl px-3 py-3 text-left text-xs font-semibold transition ${
+                      activePanel === id
+                        ? "bg-violet-600 text-white"
+                        : "text-[#756985] hover:bg-violet-50"
+                    }`}
                   >
-                    <Icon size={17} />
+                    <Icon size={16} />
                     {label}
                   </button>
                 ))}
               </div>
-            )}
-          </header>
+            </div>
+          )}
+        </header>
 
-          <main className="px-5 sm:px-8 lg:px-10">
-            {/* OVERVIEW */}
+        <main className="px-5 sm:px-8 lg:px-10">
+          {/* OVERVIEW */}
 
-            <section
-              id="overview"
-              className="scroll-mt-24 pb-12 pt-8 sm:pt-10"
-            >
-              <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-                <p className="text-xs font-bold uppercase tracking-[.2em] text-violet-600">
-                  mern stack developer
+          <section
+            id="overview"
+            className="scroll-mt-24 pb-12 pt-8 sm:pt-10"
+          >
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+              <p className="text-xs font-bold uppercase tracking-[.2em] text-violet-600">
+                MERN Stack Developer
+              </p>
+
+              <p className="font-mono text-[11px] text-[#a398b1]">
+                PROFILE STATUS: ACTIVE
+              </p>
+            </div>
+
+            <div className="dashboard-grid relative overflow-hidden rounded-[2rem] border border-violet-100 bg-white p-6 soft-shadow sm:p-9 lg:p-12">
+              <div className="absolute -right-24 -top-28 h-72 w-72 rounded-full bg-violet-100/80 blur-3xl" />
+              <div className="absolute -bottom-28 -left-20 h-64 w-64 rounded-full bg-fuchsia-100/60 blur-3xl" />
+
+              <div className="relative max-w-4xl">
+                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-violet-100 bg-white/90 px-3 py-2 text-xs font-semibold text-violet-700">
+                  <Sparkles size={14} />
+                  Hello, welcome to my space
+                </div>
+
+                <h1 className="max-w-4xl text-4xl font-black leading-[1.08] tracking-[-.05em] text-[#2d2342] sm:text-5xl lg:text-6xl xl:text-7xl">
+                  I turn ideas into{" "}
+                  <span className="bg-gradient-to-r from-violet-600 to-fuchsia-500 bg-clip-text text-transparent">
+                    useful web experiences.
+                  </span>
+                </h1>
+
+                <p className="mt-6 max-w-2xl text-sm leading-7 text-[#786d89] sm:text-base sm:leading-8">
+                  I'm{" "}
+                  <strong className="text-[#4c3d62]">Nihala M. S.</strong> — an
+                  MCA graduate and aspiring MERN Stack Developer with six
+                  months of internship experience. I enjoy building responsive
+                  web applications and turning ideas into practical digital
+                  experiences. I also work with website SEO, Google Analytics,
+                  and search performance tools.
                 </p>
 
-                <p className="font-mono text-[11px] text-[#a398b1]">
-                  PROFILE STATUS: ACTIVE
-                </p>
-              </div>
-
-              <div className="dashboard-grid relative overflow-hidden rounded-[2rem] border border-violet-100 bg-white p-6 soft-shadow sm:p-9 lg:p-10">
-                <div className="absolute -right-24 -top-28 h-72 w-72 rounded-full bg-violet-100/80 blur-3xl" />
-
-                <div className="relative grid items-center gap-10 lg:grid-cols-[1.15fr_.85fr]">
-                  <div>
-                    <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-violet-100 bg-white/90 px-3 py-2 text-xs font-semibold text-violet-700">
-                      <Sparkles size={14} />
-                      Hello, welcome to my space
-                    </div>
-
-                    <h1 className="max-w-2xl text-4xl font-black leading-[1.05] tracking-[-.05em] text-[#2d2342] sm:text-5xl xl:text-6xl">
-                      I turn ideas into{" "}
-                      <span className="bg-gradient-to-r from-violet-600 to-fuchsia-500 bg-clip-text text-transparent">
-                        useful web experiences.
-                      </span>
-                    </h1>
-
-                    <p className="mt-5 max-w-xl text-sm leading-7 text-[#786d89] sm:text-base">
-                      I'm{" "}
-                      <strong className="text-[#4c3d62]">
-                        Nihala M. S.
-                      </strong>{" "}
-                      — an MCA graduate and aspiring MERN Stack Developer with
-                      six months of internship experience. Explore my work
-                      through this interactive developer workspace.
-                    </p>
-
-                    <div className="mt-7 flex flex-wrap gap-3">
-                      <button
-                        onClick={() => goTo("project-lab")}
-                        className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-violet-200 transition hover:-translate-y-0.5 hover:bg-violet-700"
-                      >
-                        Explore Project Lab <ArrowUpRight size={17} />
-                      </button>
-
-                      <button
-                        onClick={() => setAssistantOpen(true)}
-                        className="inline-flex items-center gap-2 rounded-xl border border-violet-200 bg-white px-5 py-3.5 text-sm font-bold text-violet-700 transition hover:bg-violet-50"
-                      >
-                        <Bot size={17} />
-                        Ask my Portfolio Twin
-                      </button>
-                    </div>
-
-                    <div className="mt-8 flex flex-wrap items-center gap-3">
-                      <a
-                        href="https://github.com/Nihala-ms"
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label="GitHub"
-                        className="rounded-xl border border-violet-100 bg-white p-3 text-[#746487] hover:border-violet-300 hover:text-violet-700"
-                      >
-                        <FaGithub size={18} />
-                      </a>
-
-                      <a
-                        href="https://linkedin.com/in/nihala-ms"
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label="LinkedIn"
-                        className="rounded-xl border border-violet-100 bg-white p-3 text-[#746487] hover:border-violet-300 hover:text-violet-700"
-                      >
-                        <FaLinkedinIn size={18} />
-                      </a>
-
-                      <button
-                        onClick={() => goTo("contact")}
-                        aria-label="Contact"
-                        className="rounded-xl border border-violet-100 bg-white p-3 text-[#746487] hover:border-violet-300 hover:text-violet-700"
-                      >
-                        <Mail size={18} />
-                      </button>
-
-                      <span className="text-xs text-[#9a8eaa]">
-                        Curious by nature. Growing with every build.
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* PROFILE PHOTO */}
-
-{/* PROFILE VISUAL — clean professional version */}
-<div className="relative mx-auto w-full max-w-[330px]">
-  <div className="relative overflow-hidden rounded-2xl border border-violet-100 bg-white p-8 text-center shadow-lg shadow-violet-100/60">
-
-    <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-violet-100 text-3xl font-bold text-violet-700">
-      N
-    </div>
-
-    <h3 className="mt-5 text-2xl font-bold tracking-tight text-gray-900">
-      Nihala M. S.
-    </h3>
-
-    <p className="mt-2 text-sm font-medium text-violet-600">
-      MERN Stack Developer
-    </p>
-
-    <p className="mx-auto mt-4 max-w-[240px] text-sm leading-6 text-gray-500">
-      Building responsive web applications with modern technologies.
-    </p>
-
-    <div className="mt-6 flex items-center justify-center gap-4 text-2xl">
-      <FaReact className="text-cyan-600" />
-      <FaNodeJs className="text-green-600" />
-      <SiMongodb className="text-emerald-600" />
-      <SiJavascript className="text-amber-500" />
-    </div>
-
-    <div className="mt-6 border-t border-gray-100 pt-4">
-      <span className="inline-flex items-center gap-2 text-sm font-medium text-gray-600">
-        <span className="h-2 w-2 rounded-full bg-green-500"></span>
-        Open to opportunities
-      </span>
-    </div>
-
-  </div>
-</div>                </div>
-              </div>
-
-              {/* PROFILE STATS */}
-
-              <div className="mt-4 grid grid-cols-2 gap-3 xl:grid-cols-4">
-                {[
-                  {
-                    label: "Internship experience",
-                    value: "6 months",
-                    icon: BriefcaseBusiness,
-                    sub: "Practical exposure",
-                  },
-                  {
-                    label: "Featured projects",
-                    value: "12",
-                    icon: Layers3,
-                    sub: "Apps & experiments",
-                  },
-                  {
-                    label: "Core stack",
-                    value: "MERN",
-                    icon: Terminal,
-                    sub: "Frontend + backend",
-                  },
-                  {
-                    label: "Education",
-                    value: "MCA",
-                    icon: GraduationCap,
-                    sub: "Graduate · 2025",
-                  },
-                ].map(({ label, value, icon: Icon, sub }) => (
-                  <div
-                    key={label}
-                    className="rounded-2xl border border-violet-100 bg-white p-4 sm:p-5"
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <button
+                    onClick={() => goTo("project-lab")}
+                    className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-violet-200 transition hover:-translate-y-0.5 hover:bg-violet-700"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-[#8b7f9b]">
-                        {label}
-                      </span>
-                      <Icon size={16} className="text-violet-500" />
-                    </div>
+                    Explore Project Lab <ArrowUpRight size={17} />
+                  </button>
 
-                    <p className="mt-3 text-2xl font-black tracking-tight text-[#302342]">
-                      {value}
-                    </p>
+                  <button
+                    onClick={() => setAssistantOpen(true)}
+                    className="inline-flex items-center gap-2 rounded-xl border border-violet-200 bg-white px-5 py-3.5 text-sm font-bold text-violet-700 transition hover:bg-violet-50"
+                  >
+                    <Bot size={17} />
+                    Ask my Portfolio Twin
+                  </button>
+                </div>
 
-                    <p className="mt-1 text-[11px] text-[#a398b1]">{sub}</p>
-                  </div>
-                ))}
-              </div>
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <a
+                    href="https://github.com/Nihala-ms"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="GitHub"
+                    className="rounded-xl border border-violet-100 bg-white p-3 text-[#746487] hover:border-violet-300 hover:text-violet-700"
+                  >
+                    <FaGithub size={18} />
+                  </a>
 
-              {/* FEATURE DESTINATIONS */}
+                  <a
+                    href="https://linkedin.com/in/nihala-ms"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="LinkedIn"
+                    className="rounded-xl border border-violet-100 bg-white p-3 text-[#746487] hover:border-violet-300 hover:text-violet-700"
+                  >
+                    <FaLinkedinIn size={18} />
+                  </a>
 
-              <div className="mt-10">
-                <div className="mb-4 flex items-end justify-between gap-3">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[.2em] text-violet-600">
-                      Choose your path
-                    </p>
+                  <button
+                    onClick={() => goTo("contact")}
+                    aria-label="Contact"
+                    className="rounded-xl border border-violet-100 bg-white p-3 text-[#746487] hover:border-violet-300 hover:text-violet-700"
+                  >
+                    <Mail size={18} />
+                  </button>
 
-                    <h2 className="mt-2 text-xl font-bold text-[#302342] sm:text-2xl">
-                      Explore the portfolio in four ways.
-                    </h2>
-                  </div>
-
-                  <span className="hidden font-mono text-xs text-[#b1a6c0] sm:block">
-                    QUICK ACCESS / 04
+                  <span className="text-xs text-[#9a8eaa]">
+                    Curious by nature. Growing with every build.
                   </span>
                 </div>
 
-                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                  {featureTiles.map(
-                    ({ id, code, title, desc, icon: Icon, tag, tone }) => (
-                      <button
-                        key={id}
-                        onClick={() => goTo(id)}
-                        className="group rounded-2xl border border-violet-100 bg-white p-5 text-left transition hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-100"
-                      >
-                        <div className="flex items-start justify-between">
-                          <span className={`rounded-xl p-3 ${tone}`}>
-                            <Icon size={19} />
-                          </span>
+                {/* TECHNOLOGY TAGS */}
 
-                          <span className="font-mono text-xs text-[#c1b6ce]">
-                            /{code}
-                          </span>
-                        </div>
-
-                        <h3 className="mt-5 font-bold text-[#302342]">
-                          {title}
-                        </h3>
-
-                        <p className="mt-2 min-h-[44px] text-xs leading-5 text-[#887c98]">
-                          {desc}
-                        </p>
-
-                        <div className="mt-4 flex items-center justify-between border-t border-violet-50 pt-3">
-                          <span className="text-[10px] font-semibold uppercase tracking-wide text-violet-600">
-                            {tag}
-                          </span>
-
-                          <ArrowUpRight
-                            size={16}
-                            className="text-[#a99bb9] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-violet-600"
-                          />
-                        </div>
-                      </button>
-                    )
-                  )}
-                </div>
-              </div>
-            </section>
-
-            {/* PROJECT LAB */}
-
-            <section
-              id="project-lab"
-              className="scroll-mt-24 border-t border-violet-100 py-16 sm:py-20"
-            >
-              <SectionHeader
-                kicker="01 / Project Lab"
-                title="Builds, not just buzzwords."
-                text="Explore a selection of applications and practice projects. Search by name or technology, then open the live demo or repository."
-                number="LAB_001"
-              />
-
-              <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <label className="flex max-w-lg flex-1 items-center gap-3 rounded-xl border border-violet-100 bg-white px-4">
-                  <Search size={17} className="text-violet-500" />
-                  <input
-                    value={projectSearch}
-                    onChange={(event) => setProjectSearch(event.target.value)}
-                    placeholder="Search projects, tools, technologies..."
-                    className="h-12 min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-[#b0a5bd]"
-                  />
-
-                  {projectSearch && (
-                    <button
-                      type="button"
-                      onClick={() => setProjectSearch("")}
-                      aria-label="Clear search"
-                      className="text-violet-600"
-                    >
-                      <X size={16} />
-                    </button>
-                  )}
-                </label>
-
-                <p className="text-xs text-[#9386a5]">
-                  {visibleProjects.length} result
-                  {visibleProjects.length === 1 ? "" : "s"}
-                </p>
-              </div>
-
-              <div className="mb-7 flex flex-wrap gap-2">
-                {filters.map((filter) => (
-                  <button
-                    key={filter}
-                    onClick={() => setProjectFilter(filter)}
-                    className={`rounded-xl px-4 py-2.5 text-xs font-bold transition ${
-                      projectFilter === filter
-                        ? "bg-violet-600 text-white"
-                        : "border border-violet-100 bg-white text-[#786d89] hover:border-violet-300 hover:bg-violet-50"
-                    }`}
-                  >
-                    {filter}
-                  </button>
-                ))}
-              </div>
-
-              {visibleProjects.length > 0 ? (
-                <div className="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
-                  {visibleProjects.map((project) => (
-                    <article
-                      key={project.title}
-                      className="group overflow-hidden rounded-3xl border border-violet-100 bg-white transition hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-100"
-                    >
-                      <div
-                        className={`relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br ${project.accent}`}
-                      >
-                        <div className="absolute inset-0 opacity-50 [background-image:linear-gradient(#c4b5fd_1px,transparent_1px),linear-gradient(90deg,#c4b5fd_1px,transparent_1px)] [background-size:26px_26px]" />
-
-                        <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-white bg-white/80 text-violet-700 shadow-lg transition group-hover:scale-110">
-                          <ProjectIcon type={project.icon} />
-                        </div>
-
-                        <span className="absolute left-4 top-4 rounded-full border border-white/80 bg-white/80 px-3 py-1 text-[10px] font-bold text-violet-700">
-                          PROJECT {project.number}
-                        </span>
-
-                        <span className="absolute bottom-4 right-4 text-[10px] font-semibold text-[#7e7190]">
-                          {project.type}
-                        </span>
-                      </div>
-
-                      <div className="p-5 sm:p-6">
-                        <div className="flex items-start justify-between gap-3">
-                          <h3 className="text-lg font-bold text-[#302342]">
-                            {project.title}
-                          </h3>
-
-                          <ArrowUpRight
-                            size={17}
-                            className="shrink-0 text-[#b0a5bd] transition group-hover:text-violet-600"
-                          />
-                        </div>
-
-                        <p className="mt-3 min-h-[66px] text-sm leading-6 text-[#817590]">
-                          {project.description}
-                        </p>
-
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {project.tech.map((tech) => (
-                            <span
-                              key={tech}
-                              className="rounded-lg bg-violet-50 px-2.5 py-1.5 text-[10px] font-semibold text-violet-700"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-
-                        <div className="mt-5 flex flex-wrap gap-2 border-t border-violet-50 pt-4">
-                          {project.live && (
-                            <a
-                              href={project.live}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-4 py-2.5 text-xs font-bold text-white hover:bg-violet-700"
-                            >
-                              Live preview <ExternalLink size={13} />
-                            </a>
-                          )}
-
-                          {project.github && (
-                            <a
-                              href={project.github}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="inline-flex items-center gap-2 rounded-xl border border-violet-100 px-4 py-2.5 text-xs font-bold text-violet-700 hover:bg-violet-50"
-                            >
-                              <FaGithub size={14} />
-                              Source
-                            </a>
-                          )}
-
-                          {!project.live && !project.github && (
-                            <span className="text-xs leading-6 text-[#9386a5]">
-                              Project links will be added soon.
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              ) : (
-                <div className="rounded-3xl border border-dashed border-violet-200 bg-white p-12 text-center">
-                  <Search size={26} className="mx-auto text-violet-500" />
-                  <h3 className="mt-4 font-bold">No matching project</h3>
-
-                  <p className="mt-2 text-sm text-[#9386a5]">
-                    Try another search term or clear the filters.
+                <div className="mt-10 border-t border-violet-100 pt-6">
+                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[.2em] text-[#a398b1]">
+                    Working with
                   </p>
 
-                  <button
-                    onClick={() => {
-                      setProjectSearch("");
-                      setProjectFilter("All");
-                    }}
-                    className="mt-4 rounded-xl bg-violet-600 px-4 py-2.5 text-xs font-bold text-white"
-                  >
-                    Reset project lab
-                  </button>
-                </div>
-              )}
-            </section>
-
-            {/* DEVELOPER STACK */}
-
-            <section
-              id="developer-stack"
-              className="scroll-mt-24 border-t border-violet-100 py-16 sm:py-20"
-            >
-              <SectionHeader
-                kicker="02 / Developer Stack"
-                title="My tools for making things work."
-                text="A snapshot of the technologies and workflows I use across frontend and full-stack projects."
-                number="STACK_002"
-              />
-
-              <div className="grid gap-5 lg:grid-cols-[.8fr_1.2fr]">
-                <div className="rounded-3xl border border-violet-100 bg-white p-6 sm:p-8">
-                  <p className="text-xs font-bold uppercase tracking-[.18em] text-violet-600">
-                    Everyday toolkit
-                  </p>
-
-                  <h3 className="mt-3 text-2xl font-black tracking-tight">
-                    Small steps. Solid foundations.
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-7 text-[#817590]">
-                    I enjoy building interfaces, connecting APIs, organizing
-                    data, and learning how the pieces of a web application work
-                    together.
-                  </p>
-
-                  <div className="mt-7 grid grid-cols-3 gap-3">
-                    {techStack.map(({ name, Icon, color }) => (
-                      <div
-                        key={name}
-                        className="rounded-2xl border border-violet-50 bg-[#fcfaff] p-3 text-center transition hover:-translate-y-1 hover:border-violet-200"
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      "React",
+                      "JavaScript",
+                      "Node.js",
+                      "Express",
+                      "MongoDB",
+                      "Tailwind CSS",
+                      "Google Analytics 4",
+                      "Google Search Console",
+                      "SEO",
+                    ].map((technology) => (
+                      <span
+                        key={technology}
+                        className="rounded-full border border-violet-100 bg-white/90 px-3 py-2 text-xs font-semibold text-[#6f627f]"
                       >
-                        <Icon size={25} className={`mx-auto ${color}`} />
-                        <p className="mt-2 text-[10px] font-semibold text-[#6f627f]">
-                          {name}
-                        </p>
-                      </div>
+                        {technology}
+                      </span>
                     ))}
                   </div>
                 </div>
+              </div>
 
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {skillGroups.map((group, index) => (
-                    <article
-                      key={group.title}
-                      className={`rounded-3xl border border-violet-100 p-6 ${
-                        index === 0 ? "bg-violet-50/70" : "bg-white"
-                      } ${index === 2 ? "sm:col-span-2" : ""}`}
+              <div className="pointer-events-none absolute bottom-8 right-8 hidden text-right lg:block">
+                <p className="font-mono text-xs text-violet-300">
+                  &lt;developer /&gt;
+                </p>
+                <p className="mt-2 font-mono text-[10px] text-[#b4a9c1]">
+                  BUILD · LEARN · IMPROVE
+                </p>
+              </div>
+            </div>
+
+            {/* PROFILE STATS */}
+
+            <div className="mt-4 grid grid-cols-2 gap-3 xl:grid-cols-4">
+              {[
+                {
+                  label: "Internship experience",
+                  value: "6 months",
+                  icon: BriefcaseBusiness,
+                  sub: "Practical exposure",
+                },
+                {
+                  label: "Featured projects",
+                  value: "14",
+                  icon: Layers3,
+                  sub: "Apps & experiments",
+                },
+                {
+                  label: "Core stack",
+                  value: "MERN",
+                  icon: Terminal,
+                  sub: "Frontend + backend",
+                },
+                {
+                  label: "Education",
+                  value: "MCA",
+                  icon: GraduationCap,
+                  sub: "Graduate · 2025",
+                },
+              ].map(({ label, value, icon: Icon, sub }) => (
+                <div
+                  key={label}
+                  className="rounded-2xl border border-violet-100 bg-white p-4 sm:p-5"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-[#8b7f9b]">{label}</span>
+                    <Icon size={16} className="text-violet-500" />
+                  </div>
+
+                  <p className="mt-3 text-2xl font-black tracking-tight text-[#302342]">
+                    {value}
+                  </p>
+
+                  <p className="mt-1 text-[11px] text-[#a398b1]">{sub}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* FEATURE DESTINATIONS */}
+
+            <div className="mt-10">
+              <div className="mb-4 flex items-end justify-between gap-3">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[.2em] text-violet-600">
+                    Choose your path
+                  </p>
+
+                  <h2 className="mt-2 text-xl font-bold text-[#302342] sm:text-2xl">
+                    Explore the portfolio.
+                  </h2>
+                </div>
+
+                <span className="hidden font-mono text-xs text-[#b1a6c0] sm:block">
+                  QUICK ACCESS / 05
+                </span>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+                {featureTiles.map(
+                  ({ id, code, title, desc, icon: Icon, tag, tone }) => (
+                    <button
+                      key={id}
+                      onClick={() => goTo(id)}
+                      className="group rounded-2xl border border-violet-100 bg-white p-5 text-left transition hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-100"
                     >
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <h3 className="font-bold text-[#302342]">
-                            {group.title}
-                          </h3>
-                          <p className="mt-2 text-xs leading-5 text-[#8b7f9b]">
-                            {group.description}
-                          </p>
-                        </div>
+                      <div className="flex items-start justify-between">
+                        <span className={`rounded-xl p-3 ${tone}`}>
+                          <Icon size={19} />
+                        </span>
 
-                        <span className="rounded-xl bg-white p-2 text-violet-600">
-                          <Code2 size={17} />
+                        <span className="font-mono text-xs text-[#c1b6ce]">
+                          /{code}
                         </span>
                       </div>
 
-                      <div className="mt-5 flex flex-wrap gap-2">
-                        {group.skills.map((skill) => (
+                      <h3 className="mt-5 font-bold text-[#302342]">
+                        {title}
+                      </h3>
+
+                      <p className="mt-2 min-h-[44px] text-xs leading-5 text-[#887c98]">
+                        {desc}
+                      </p>
+
+                      <div className="mt-4 flex items-center justify-between border-t border-violet-50 pt-3">
+                        <span className="text-[10px] font-semibold uppercase tracking-wide text-violet-600">
+                          {tag}
+                        </span>
+
+                        <ArrowUpRight
+                          size={16}
+                          className="text-[#a99bb9] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-violet-600"
+                        />
+                      </div>
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
+          </section>
+
+          {/* PROJECT LAB */}
+
+          <section
+            id="project-lab"
+            className="scroll-mt-24 border-t border-violet-100 py-16 sm:py-20"
+          >
+            <SectionHeader
+              kicker="01 / Project Lab"
+              title="Builds, not just buzzwords."
+              text="Explore a selection of applications and practice projects. Search by name or technology, then open the live demo or repository."
+              number="LAB_001"
+            />
+
+            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <label className="flex max-w-lg flex-1 items-center gap-3 rounded-xl border border-violet-100 bg-white px-4">
+                <Search size={17} className="text-violet-500" />
+
+                <input
+                  value={projectSearch}
+                  onChange={(event) => setProjectSearch(event.target.value)}
+                  placeholder="Search projects, tools, technologies..."
+                  className="h-12 min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-[#b0a5bd]"
+                />
+
+                {projectSearch && (
+                  <button
+                    type="button"
+                    onClick={() => setProjectSearch("")}
+                    aria-label="Clear search"
+                    className="text-violet-600"
+                  >
+                    <X size={16} />
+                  </button>
+                )}
+              </label>
+
+              <p className="text-xs text-[#9386a5]">
+                {visibleProjects.length} result
+                {visibleProjects.length === 1 ? "" : "s"}
+              </p>
+            </div>
+
+            <div className="mb-7 flex flex-wrap gap-2">
+              {filters.map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => setProjectFilter(filter)}
+                  className={`rounded-xl px-4 py-2.5 text-xs font-bold transition ${
+                    projectFilter === filter
+                      ? "bg-violet-600 text-white"
+                      : "border border-violet-100 bg-white text-[#786d89] hover:border-violet-300 hover:bg-violet-50"
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+
+            {visibleProjects.length > 0 ? (
+              <div className="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
+                {visibleProjects.map((project) => (
+                  <article
+                    key={project.title}
+                    className="group overflow-hidden rounded-3xl border border-violet-100 bg-white transition hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-100"
+                  >
+                    <div
+                      className={`relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br ${project.accent}`}
+                    >
+                      <div className="absolute inset-0 opacity-50 [background-image:linear-gradient(#c4b5fd_1px,transparent_1px),linear-gradient(90deg,#c4b5fd_1px,transparent_1px)] [background-size:26px_26px]" />
+
+                      <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-white bg-white/80 text-violet-700 shadow-lg transition group-hover:scale-110">
+                        <ProjectIcon type={project.icon} />
+                      </div>
+
+                      <span className="absolute left-4 top-4 rounded-full border border-white/80 bg-white/80 px-3 py-1 text-[10px] font-bold text-violet-700">
+                        PROJECT {project.number}
+                      </span>
+
+                      <span className="absolute bottom-4 right-4 text-[10px] font-semibold text-[#7e7190]">
+                        {project.type}
+                      </span>
+                    </div>
+
+                    <div className="p-5 sm:p-6">
+                      <div className="flex items-start justify-between gap-3">
+                        <h3 className="text-lg font-bold text-[#302342]">
+                          {project.title}
+                        </h3>
+
+                        <ArrowUpRight
+                          size={17}
+                          className="shrink-0 text-[#b0a5bd] transition group-hover:text-violet-600"
+                        />
+                      </div>
+
+                      <p className="mt-3 min-h-[66px] text-sm leading-6 text-[#817590]">
+                        {project.description}
+                      </p>
+
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {project.tech.map((tech) => (
                           <span
-                            key={skill}
-                            className="rounded-lg border border-violet-100 bg-white px-3 py-2 text-xs font-medium text-[#675978]"
+                            key={tech}
+                            className="rounded-lg bg-violet-50 px-2.5 py-1.5 text-[10px] font-semibold text-violet-700"
                           >
-                            {skill}
+                            {tech}
                           </span>
                         ))}
                       </div>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            </section>
 
-            {/* JOURNEY MAP */}
+                      <div className="mt-5 flex flex-wrap gap-2 border-t border-violet-50 pt-4">
+                        {project.live && (
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-4 py-2.5 text-xs font-bold text-white hover:bg-violet-700"
+                          >
+                            Live preview <ExternalLink size={13} />
+                          </a>
+                        )}
 
-            <section
-              id="journey-map"
-              className="scroll-mt-24 border-t border-violet-100 py-16 sm:py-20"
-            >
-              <SectionHeader
-                kicker="03 / Journey Map"
-                title="The path that brought me here."
-                text="Education, training, and hands-on learning that continue to shape my development journey."
-                number="PATH_003"
-              />
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 rounded-xl border border-violet-100 px-4 py-2.5 text-xs font-bold text-violet-700 hover:bg-violet-50"
+                          >
+                            <FaGithub size={14} />
+                            Source
+                          </a>
+                        )}
 
-              <div className="relative ml-2 space-y-4 border-l-2 border-violet-100 pl-6 sm:ml-4 sm:pl-8">
-                {journey.map((item) => (
-                  <article
-                    key={item.title}
-                    className="relative rounded-2xl border border-violet-100 bg-white p-5 transition hover:border-violet-200 hover:shadow-lg hover:shadow-violet-100 sm:p-6"
-                  >
-                    <span className="absolute -left-[35px] top-7 h-4 w-4 rounded-full border-4 border-[#faf8ff] bg-violet-500 sm:-left-[43px]" />
-
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <span className="rounded-full bg-violet-50 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-violet-700">
-                          {item.tag}
-                        </span>
-
-                        <h3 className="mt-4 text-lg font-bold text-[#302342]">
-                          {item.title}
-                        </h3>
-
-                        <p className="mt-1 text-sm font-medium text-violet-700">
-                          {item.place}
-                        </p>
+                        {!project.live && !project.github && (
+                          <span className="text-xs leading-6 text-[#9386a5]">
+                            Project links will be added soon.
+                          </span>
+                        )}
                       </div>
-
-                      <span className="font-mono text-sm font-bold text-[#a398b1]">
-                        {item.year}
-                      </span>
                     </div>
-
-                    <p className="mt-3 max-w-3xl text-sm leading-7 text-[#817590]">
-                      {item.description}
-                    </p>
                   </article>
                 ))}
               </div>
-            </section>
+            ) : (
+              <div className="rounded-3xl border border-dashed border-violet-200 bg-white p-12 text-center">
+                <Search size={26} className="mx-auto text-violet-500" />
+                <h3 className="mt-4 font-bold">No matching project</h3>
 
-            {/* CONTACT */}
+                <p className="mt-2 text-sm text-[#9386a5]">
+                  Try another search term or clear the filters.
+                </p>
 
-            <section
-              id="contact"
-              className="scroll-mt-24 border-t border-violet-100 py-16 sm:py-20"
-            >
-              <SectionHeader
-                kicker="04 / Contact"
-                title="Let's build the next thing."
-                text="Open to entry-level web development roles, collaborative projects, and opportunities to keep learning."
-                number="CONNECT_004"
-              />
+                <button
+                  onClick={() => {
+                    setProjectSearch("");
+                    setProjectFilter("All");
+                  }}
+                  className="mt-4 rounded-xl bg-violet-600 px-4 py-2.5 text-xs font-bold text-white"
+                >
+                  Reset project lab
+                </button>
+              </div>
+            )}
+          </section>
 
-              <div className="grid gap-5 lg:grid-cols-[.8fr_1.2fr]">
-                <div className="rounded-3xl bg-gradient-to-br from-violet-600 to-fuchsia-600 p-7 text-white sm:p-8">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15">
-                    <Mail size={22} />
-                  </div>
+          {/* DEVELOPER STACK */}
 
-                  <h3 className="mt-6 text-2xl font-black">
-                    Have an opportunity?
-                  </h3>
+          <section
+            id="developer-stack"
+            className="scroll-mt-24 border-t border-violet-100 py-16 sm:py-20"
+          >
+            <SectionHeader
+              kicker="02 / Developer Stack"
+              title="My tools for making things work."
+              text="A snapshot of the technologies and workflows I use across frontend, full-stack development, SEO, and analytics projects."
+              number="STACK_002"
+            />
 
-                  <p className="mt-3 text-sm leading-7 text-white/80">
-                    I'd love to hear about your team, role, or project. Let's
-                    connect and see how I can contribute.
-                  </p>
+            <div className="grid gap-5 lg:grid-cols-[.8fr_1.2fr]">
+              <div className="rounded-3xl border border-violet-100 bg-white p-6 sm:p-8">
+                <p className="text-xs font-bold uppercase tracking-[.18em] text-violet-600">
+                  Everyday toolkit
+                </p>
 
-                  <div className="mt-7 space-y-3">
-                    <a
-                      href="https://github.com/Nihala-ms"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold hover:bg-white/15"
+                <h3 className="mt-3 text-2xl font-black tracking-tight">
+                  Small steps. Solid foundations.
+                </h3>
+
+                <p className="mt-3 text-sm leading-7 text-[#817590]">
+                  I enjoy building interfaces, connecting APIs, organizing
+                  data, and learning how the pieces of a web application work
+                  together. I also explore how SEO and analytics help websites
+                  reach and understand their visitors.
+                </p>
+
+                <div className="mt-7 grid grid-cols-3 gap-3">
+                  {techStack.map(({ name, Icon, color }) => (
+                    <div
+                      key={name}
+                      className="rounded-2xl border border-violet-50 bg-[#fcfaff] p-3 text-center transition hover:-translate-y-1 hover:border-violet-200"
                     >
-                      <span className="flex items-center gap-3">
-                        <FaGithub size={18} />
-                        GitHub profile
-                      </span>
-                      <ArrowUpRight size={16} />
-                    </a>
-
-                    <a
-                      href="https://linkedin.com/in/nihala-ms"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold hover:bg-white/15"
-                    >
-                      <span className="flex items-center gap-3">
-                        <FaLinkedinIn size={18} />
-                        LinkedIn
-                      </span>
-                      <ArrowUpRight size={16} />
-                    </a>
-
-                    <a
-                      href="/resume.pdf"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center justify-between rounded-xl bg-white px-4 py-3 text-sm font-bold text-violet-700 hover:bg-violet-50"
-                    >
-                      <span className="flex items-center gap-3">
-                        <Download size={17} />
-                        Download resume
-                      </span>
-                      <ArrowUpRight size={16} />
-                    </a>
-                  </div>
+                      <Icon size={25} className={`mx-auto ${color}`} />
+                      <p className="mt-2 text-[10px] font-semibold text-[#6f627f]">
+                        {name}
+                      </p>
+                    </div>
+                  ))}
                 </div>
 
-                <form
-                  onSubmit={submitContact}
-                  className="rounded-3xl border border-violet-100 bg-white p-6 sm:p-8"
-                >
-                  <h3 className="text-xl font-bold">Contact us</h3>
-
-                  <p className="mt-2 text-sm text-[#8b7f9b]">
-                    Your message will be submitted to the portfolio backend.
-                  </p>
-
-                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                    <label className="text-xs font-semibold text-[#6c5d7d]">
-                      Your name
-                      <input
-                        required
-                        minLength={2}
-                        maxLength={100}
-                        value={contact.name}
-                        onChange={(event) =>
-                          setContact({
-                            ...contact,
-                            name: event.target.value,
-                          })
-                        }
-                        placeholder="Enter your name"
-                        className="mt-2 w-full rounded-xl border border-violet-100 px-4 py-3 text-sm font-normal outline-none focus:border-violet-400"
-                      />
-                    </label>
-
-                    <label className="text-xs font-semibold text-[#6c5d7d]">
-                      Email address
-                      <input
-                        required
-                        type="email"
-                        maxLength={254}
-                        value={contact.email}
-                        onChange={(event) =>
-                          setContact({
-                            ...contact,
-                            email: event.target.value,
-                          })
-                        }
-                        placeholder="you@example.com"
-                        className="mt-2 w-full rounded-xl border border-violet-100 px-4 py-3 text-sm font-normal outline-none focus:border-violet-400"
-                      />
-                    </label>
+                <div className="mt-5 grid grid-cols-2 gap-3">
+                  <div className="rounded-2xl border border-violet-50 bg-[#fcfaff] p-4">
+                    <ChartNoAxesCombined
+                      size={23}
+                      className="text-violet-600"
+                    />
+                    <p className="mt-2 text-xs font-bold text-[#514362]">
+                      Google Analytics 4
+                    </p>
                   </div>
 
-                  <label className="mt-4 block text-xs font-semibold text-[#6c5d7d]">
-                    Message
-                    <textarea
+                  <div className="rounded-2xl border border-violet-50 bg-[#fcfaff] p-4">
+                    <Globe size={23} className="text-violet-600" />
+                    <p className="mt-2 text-xs font-bold text-[#514362]">
+                      Search Console
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {skillGroups.map((group, index) => (
+                  <article
+                    key={group.title}
+                    className={`rounded-3xl border border-violet-100 p-6 ${
+                      index === 0 ? "bg-violet-50/70" : "bg-white"
+                    } ${index === 2 || index === 3 ? "sm:col-span-2" : ""}`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 className="font-bold text-[#302342]">
+                          {group.title}
+                        </h3>
+                        <p className="mt-2 text-xs leading-5 text-[#8b7f9b]">
+                          {group.description}
+                        </p>
+                      </div>
+
+                      <span className="rounded-xl bg-violet-50 p-2 text-violet-600">
+                        {index === 3 ? (
+                          <ChartNoAxesCombined size={17} />
+                        ) : (
+                          <Code2 size={17} />
+                        )}
+                      </span>
+                    </div>
+
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {group.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="rounded-lg border border-violet-100 bg-white px-3 py-2 text-xs font-medium text-[#675978]"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* JOURNEY MAP */}
+
+          <section
+            id="journey-map"
+            className="scroll-mt-24 border-t border-violet-100 py-16 sm:py-20"
+          >
+            <SectionHeader
+              kicker="03 / Journey Map"
+              title="The path that brought me here."
+              text="Education, training, and hands-on learning that continue to shape my development journey."
+              number="PATH_003"
+            />
+
+            <div className="relative ml-2 space-y-4 border-l-2 border-violet-100 pl-6 sm:ml-4 sm:pl-8">
+              {journey.map((item) => (
+                <article
+                  key={item.title}
+                  className="relative rounded-2xl border border-violet-100 bg-white p-5 transition hover:border-violet-200 hover:shadow-lg hover:shadow-violet-100 sm:p-6"
+                >
+                  <span className="absolute -left-[35px] top-7 h-4 w-4 rounded-full border-4 border-[#faf8ff] bg-violet-500 sm:-left-[43px]" />
+
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <span className="rounded-full bg-violet-50 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-violet-700">
+                        {item.tag}
+                      </span>
+
+                      <h3 className="mt-4 text-lg font-bold text-[#302342]">
+                        {item.title}
+                      </h3>
+
+                      <p className="mt-1 text-sm font-medium text-violet-700">
+                        {item.place}
+                      </p>
+                    </div>
+
+                    <span className="font-mono text-sm font-bold text-[#a398b1]">
+                      {item.year}
+                    </span>
+                  </div>
+
+                  <p className="mt-3 max-w-3xl text-sm leading-7 text-[#817590]">
+                    {item.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          {/* CERTIFICATIONS */}
+
+          <section
+            id="certifications"
+            className="scroll-mt-24 border-t border-violet-100 py-16 sm:py-20"
+          >
+            <SectionHeader
+              kicker="04 / Certifications & Achievements"
+              title="Learning beyond the classroom."
+              text="Courses, professional training, and research work that have contributed to my learning journey."
+              number="CERT_004"
+            />
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {certifications.map((item) => (
+                <article
+                  key={item.number}
+                  className="group rounded-3xl border border-violet-100 bg-white p-5 transition hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-100 sm:p-6"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-violet-50 text-violet-700 transition group-hover:bg-violet-600 group-hover:text-white">
+                      <CertificationIcon type={item.icon} />
+                    </div>
+
+                    <span className="font-mono text-xs text-[#c1b6ce]">
+                      {item.number}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-5 text-lg font-bold leading-7 text-[#302342]">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-2 text-sm font-semibold text-violet-700">
+                    {item.organization}
+                  </p>
+
+                  {item.year && (
+                    <p className="mt-1 text-xs font-medium text-[#a398b1]">
+                      {item.year}
+                    </p>
+                  )}
+
+                  <p className="mt-3 text-sm leading-6 text-[#817590]">
+                    {item.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          {/* CONTACT */}
+
+          <section
+            id="contact"
+            className="scroll-mt-24 border-t border-violet-100 py-16 sm:py-20"
+          >
+            <SectionHeader
+              kicker="05 / Contact"
+              title="Let's build the next thing."
+              text="Open to entry-level web development roles, collaborative projects, and opportunities to keep learning."
+              number="CONNECT_005"
+            />
+
+            <div className="grid gap-5 lg:grid-cols-[.8fr_1.2fr]">
+              <div className="rounded-3xl bg-gradient-to-br from-violet-600 to-fuchsia-600 p-7 text-white sm:p-8">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15">
+                  <Mail size={22} />
+                </div>
+
+                <h3 className="mt-6 text-2xl font-black">
+                  Have an opportunity?
+                </h3>
+
+                <p className="mt-3 text-sm leading-7 text-white/80">
+                  I'd love to hear about your team, role, or project. Let's
+                  connect and see how I can contribute.
+                </p>
+
+                <div className="mt-7 space-y-3">
+                  <a
+                    href="https://github.com/Nihala-ms"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold hover:bg-white/15"
+                  >
+                    <span className="flex items-center gap-3">
+                      <FaGithub size={18} />
+                      GitHub profile
+                    </span>
+                    <ArrowUpRight size={16} />
+                  </a>
+
+                  <a
+                    href="https://linkedin.com/in/nihala-ms"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold hover:bg-white/15"
+                  >
+                    <span className="flex items-center gap-3">
+                      <FaLinkedinIn size={18} />
+                      LinkedIn
+                    </span>
+                    <ArrowUpRight size={16} />
+                  </a>
+
+                  <a
+                    href="/resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-between rounded-xl bg-white px-4 py-3 text-sm font-bold text-violet-700 hover:bg-violet-50"
+                  >
+                    <span className="flex items-center gap-3">
+                      <Download size={17} />
+                      Download resume
+                    </span>
+                    <ArrowUpRight size={16} />
+                  </a>
+                </div>
+              </div>
+
+              <form
+                onSubmit={submitContact}
+                className="rounded-3xl border border-violet-100 bg-white p-6 sm:p-8"
+              >
+                <h3 className="text-xl font-bold">Contact me</h3>
+
+                <p className="mt-2 text-sm text-[#8b7f9b]">
+                  Your message will be submitted to the portfolio backend.
+                </p>
+
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  <label className="text-xs font-semibold text-[#6c5d7d]">
+                    Your name
+                    <input
                       required
-                      minLength={5}
-                      maxLength={5000}
-                      rows={5}
-                      value={contact.message}
+                      minLength={2}
+                      maxLength={100}
+                      value={contact.name}
                       onChange={(event) =>
                         setContact({
                           ...contact,
-                          message: event.target.value,
+                          name: event.target.value,
                         })
                       }
-                      placeholder="Tell me about the opportunity..."
-                      className="mt-2 w-full resize-y rounded-xl border border-violet-100 px-4 py-3 text-sm font-normal outline-none focus:border-violet-400"
+                      placeholder="Enter your name"
+                      className="mt-2 w-full rounded-xl border border-violet-100 px-4 py-3 text-sm font-normal outline-none focus:border-violet-400"
                     />
                   </label>
 
-                  {contactStatus.message && (
-                    <div
-                      role="status"
-                      className={`mt-4 rounded-xl border p-3 text-sm leading-6 ${
-                        contactStatus.type === "success"
-                          ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                          : "border-rose-200 bg-rose-50 text-rose-700"
-                      }`}
-                    >
-                      {contactStatus.message}
-                    </div>
-                  )}
+                  <label className="text-xs font-semibold text-[#6c5d7d]">
+                    Email address
+                    <input
+                      required
+                      type="email"
+                      maxLength={254}
+                      value={contact.email}
+                      onChange={(event) =>
+                        setContact({
+                          ...contact,
+                          email: event.target.value,
+                        })
+                      }
+                      placeholder="you@example.com"
+                      className="mt-2 w-full rounded-xl border border-violet-100 px-4 py-3 text-sm font-normal outline-none focus:border-violet-400"
+                    />
+                  </label>
+                </div>
 
-                  <button
-                    type="submit"
-                    disabled={contactLoading}
-                    className="mt-5 inline-flex items-center gap-2 rounded-xl bg-violet-600 px-5 py-3 text-sm font-bold text-white hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-60"
+                <label className="mt-4 block text-xs font-semibold text-[#6c5d7d]">
+                  Message
+                  <textarea
+                    required
+                    minLength={5}
+                    maxLength={5000}
+                    rows={5}
+                    value={contact.message}
+                    onChange={(event) =>
+                      setContact({
+                        ...contact,
+                        message: event.target.value,
+                      })
+                    }
+                    placeholder="Tell me about the opportunity..."
+                    className="mt-2 w-full resize-y rounded-xl border border-violet-100 px-4 py-3 text-sm font-normal outline-none focus:border-violet-400"
+                  />
+                </label>
+
+                {contactStatus.message && (
+                  <div
+                    role="status"
+                    className={`mt-4 rounded-xl border p-3 text-sm leading-6 ${
+                      contactStatus.type === "success"
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                        : "border-rose-200 bg-rose-50 text-rose-700"
+                    }`}
                   >
-                    {contactLoading ? "Submitting..." : "Send message"}
-                    <Send size={15} />
-                  </button>
+                    {contactStatus.message}
+                  </div>
+                )}
 
-                  <p className="mt-3 text-[10px] leading-5 text-[#a398b1]">
-                    The success message appears only after the backend returns
-                    a successful response.
-                  </p>
-                </form>
-              </div>
-            </section>
+                <button
+                  type="submit"
+                  disabled={contactLoading}
+                  className="mt-5 inline-flex items-center gap-2 rounded-xl bg-violet-600 px-5 py-3 text-sm font-bold text-white hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {contactLoading ? "Submitting..." : "Send message"}
+                  <Send size={15} />
+                </button>
 
-            {/* FOOTER */}
-
-            <footer className="flex flex-col items-center justify-between gap-4 border-t border-violet-100 py-7 text-center sm:flex-row sm:text-left">
-              <div>
-                <p className="font-bold">
-                  Nihala M. S.
-                  <span className="text-violet-600">.</span>
+                <p className="mt-3 text-[10px] leading-5 text-[#a398b1]">
+                  The success message appears only after the backend returns
+                  a successful response.
                 </p>
+              </form>
+            </div>
+          </section>
 
-                <p className="mt-1 text-[10px] text-[#a398b1]">
-                  Personal developer workspace · Built with React
-                </p>
-              </div>
+          {/* FOOTER */}
 
-              <p className="text-xs text-[#a398b1]">
-                Designed to show the work behind the developer.
+          <footer className="flex flex-col items-center justify-between gap-4 border-t border-violet-100 py-7 text-center sm:flex-row sm:text-left">
+            <div>
+              <p className="font-bold">
+                Nihala M. S.
+                <span className="text-violet-600">.</span>
               </p>
 
-              <button
-                onClick={() => goTo("overview")}
-                className="inline-flex items-center gap-2 rounded-xl border border-violet-100 bg-white px-4 py-2.5 text-xs font-semibold text-violet-700 hover:bg-violet-50"
-              >
-                Back to overview
-                <ArrowDownRight size={14} className="-rotate-45" />
-              </button>
-            </footer>
-          </main>
-        </div>
+              <p className="mt-1 text-[10px] text-[#a398b1]">
+                Personal developer workspace · Built with React
+              </p>
+            </div>
+
+            <p className="text-xs text-[#a398b1]">
+              Designed to show the work behind the developer.
+            </p>
+
+            <button
+              onClick={() => goTo("overview")}
+              className="inline-flex items-center gap-2 rounded-xl border border-violet-100 bg-white px-4 py-2.5 text-xs font-semibold text-violet-700 hover:bg-violet-50"
+            >
+              Back to overview
+              <ArrowDownRight size={14} className="-rotate-45" />
+            </button>
+          </footer>
+        </main>
       </div>
+
+      {/* FLOATING PORTFOLIO TWIN BUTTON */}
+
+      {!assistantOpen && (
+        <button
+          type="button"
+          onClick={() => setAssistantOpen(true)}
+          aria-label="Open Portfolio Twin chat"
+          aria-expanded={assistantOpen}
+          className="fixed bottom-5 right-5 z-[70] flex items-center gap-3 rounded-full bg-violet-600 p-3.5 text-white shadow-xl shadow-violet-300 transition hover:-translate-y-1 hover:bg-violet-700 sm:bottom-7 sm:right-7 sm:px-5 sm:py-4"
+        >
+          <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-white/15">
+            <Bot size={22} />
+            <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-violet-600 bg-emerald-400" />
+          </span>
+
+          <span className="hidden text-left sm:block">
+            <span className="block text-sm font-bold">Portfolio Twin</span>
+            <span className="block text-[10px] text-violet-100">
+              Ask me anything
+            </span>
+          </span>
+        </button>
+      )}
 
       {assistantOpen && (
         <PortfolioAssistant onClose={() => setAssistantOpen(false)} />
