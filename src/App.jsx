@@ -42,8 +42,7 @@ import {
 
 const API_BASE_URL = (
   import.meta.env.VITE_API_BASE_URL ||
-  "https://portfolio-updated-chcaihqwn-nihala-ms-projects.vercel.app"
-).replace(/\/+$/, "");
+"https://portfolio-updated-m637pl9qs-nihala-ms-projects.vercel.app";).replace(/\/+$/, "");
 
 async function apiRequest(endpoint, options = {}) {
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
