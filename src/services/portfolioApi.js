@@ -1,7 +1,8 @@
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "https://portfolio-updated-chcaihqwn-nihala-ms-projects.vercel.app";
-
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://portfolio-updated-chcaihqwn-nihala-ms-projects.vercel.app";
+  
 export async function sendPortfolioMessage(message) {
   const response = await fetch(
     `${API_BASE_URL}/api/portfolio/chat`,
